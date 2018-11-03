@@ -1,0 +1,9 @@
+{
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": false,
+  "prettier.eslintIntegration": true
+}
