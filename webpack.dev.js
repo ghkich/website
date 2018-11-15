@@ -1,30 +1,30 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const autoprefixer = require("autoprefixer")
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
-  devtool: "cheap-module-source-map",
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "eslint-loader"
+        loader: 'eslint-loader'
       },
       {
         oneOf: [
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 10000,
-              name: "static/media/[name].[hash:8].[ext]"
+              name: 'static/media/[name].[hash:8].[ext]'
             }
           },
           {
             test: /\.js$/,
             include: /src/,
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               cacheDirectory: true
             }
@@ -32,27 +32,27 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              "style-loader",
+              'style-loader',
               {
-                loader: "css-loader",
+                loader: 'css-loader',
                 options: {
                   importLoaders: 1
                 }
               },
               {
-                loader: "postcss-loader",
+                loader: 'postcss-loader',
                 options: {
-                  ident: "postcss",
+                  ident: 'postcss',
                   plugins: () => [
-                    require("postcss-flexbugs-fixes"),
+                    require('postcss-flexbugs-fixes'),
                     autoprefixer({
                       browsers: [
-                        ">1%",
-                        "last 4 versions",
-                        "Firefox ESR",
-                        "not ie < 9"
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9'
                       ],
-                      flexbox: "no-2009"
+                      flexbox: 'no-2009'
                     })
                   ]
                 }
@@ -61,9 +61,9 @@ module.exports = {
           },
           {
             exclude: [/\.js$/, /\.html$/, /\.json$/],
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "static/media/[name].[hash:8].[ext]"
+              name: 'static/media/[name].[hash:8].[ext]'
             }
           }
         ]
@@ -72,8 +72,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./public/index.html",
-      filename: "./index.html"
+      template: './public/index.html',
+      filename: './index.html'
     })
   ],
   performance: {

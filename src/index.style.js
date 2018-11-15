@@ -1,8 +1,14 @@
-import styled from "styled-components"
+import { createGlobalStyle } from 'styled-components'
+import Colors from './config/colors'
 
-const Test = styled.div`
-  background-color: #f00;
-  color: #fff;
+const sanitize = require('sanitize.css') // sanitize some browser differences
+
+const GlobalStyle = createGlobalStyle`
+  ${sanitize}
+
+  body {
+    color: ${Colors.gray100};
+  }
 `
 
-export { Test }
+export { GlobalStyle }
