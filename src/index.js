@@ -1,19 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { GlobalStyle } from './index.style'
-import StateProvider from './state/provider'
-import { initialState, reducer } from './state/reducer'
-import App2 from './index.1'
+import { Provider } from 'react-redux'
+import configureStore from './state/store'
+import App from './App'
 
-const App = () => {
+const store = configureStore()
+
+const Root = () => {
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <GlobalStyle />
-      <App2 />
-    </StateProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   )
 }
 
-export default App
+export default Root
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Root />, document.getElementById('app'))
