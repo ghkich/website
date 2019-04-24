@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['react', 'jsx-a11y', 'import'],
+  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks'],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -33,12 +33,17 @@ module.exports = {
         peerDependencies: false
       }
     ],
+    // 'react-hooks/rules-of-hooks': 'warn',
+    // 'react-hooks/exhaustive-deps': 'warn',
     semi: [2, 'never'],
-    quotes: ['error', 'single']
+    quotes: ['error', 'single'],
+    'no-console': 1
   },
   parserOptions: {
     ecmaVersion: 2017,
-    ecmaFeatures: { experimentalObjectRestSpread: true },
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true
+    },
     sourceType: 'module'
   },
   env: {

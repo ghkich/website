@@ -7,7 +7,8 @@ const GlobalStyle = createGlobalStyle`
   ${sanitize}
 
   body {
-    color: ${Colors.gray100};
+    background-color: ${Colors.gray100};
+    overflow: hidden;
   }
 `
 

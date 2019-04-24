@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { HeaderContainer, HeaderNav, HeaderNavLink } from './Header.style'
+import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons'
+import {
+  HeaderContainer,
+  HeaderNav,
+  HeaderNavLink,
+  HeaderNavLinkIcon
+} from './Header.style'
 
 const Header = ({ links, activeLink, onLinkClick }) => {
   return (
@@ -11,9 +17,11 @@ const Header = ({ links, activeLink, onLinkClick }) => {
           return (
             <HeaderNavLink
               key={link.code}
+              code={link.code}
               active={active}
               onClick={() => onLinkClick(link.code)}
             >
+              {active && <HeaderNavLinkIcon icon={faChevronLeft} />}
               {active ? link.description.slice(0, 3) : link.description}
             </HeaderNavLink>
           )
