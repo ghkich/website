@@ -38,7 +38,13 @@ const getValue = categoryTypeActive => {
   return 0
 }
 
-const Logo = ({ bricks, state, categoryTypeActive, onBrickClick }) => {
+const Logo = ({
+  bricks,
+  state,
+  categoryTypeActive,
+  categoryActive,
+  onBrickClick
+}) => {
   const translateLogo = useSpring({
     to: {
       x: getValue(categoryTypeActive)
@@ -148,8 +154,16 @@ const Logo = ({ bricks, state, categoryTypeActive, onBrickClick }) => {
               id={code}
               icon={[iconType, icon]}
               label={description}
-              active={categoryTypeActive}
-              a={{ categoryType, categoryTypeActive, color, row, col, index }}
+              active={categoryActive}
+              a={{
+                state,
+                categoryType,
+                categoryTypeActive,
+                color,
+                row,
+                col,
+                index
+              }}
               onClick={() => {
                 if (state === 'construct' || state === 'explore') {
                   onBrickClick(code)
@@ -185,6 +199,7 @@ Logo.propTypes = {
     'explore'
   ]).isRequired,
   categoryTypeActive: PropTypes.string.isRequired,
+  categoryActive: PropTypes.string.isRequired,
   onBrickClick: PropTypes.func.isRequired
 }
 

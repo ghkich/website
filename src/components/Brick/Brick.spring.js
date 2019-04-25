@@ -65,6 +65,8 @@ export const useBrickProps = (
       config: config.default
     })
   } else if (state === 'explore') {
+    console.log(categoryTypeActive)
+    console.log(categoryType)
     if (categoryType === categoryTypeActive) {
       setBrickProps({
         to: {
