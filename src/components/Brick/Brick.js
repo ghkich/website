@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { BrickContainer } from './Brick.style'
+import { BrickContainer, BrickIcon, BrickLabel } from './Brick.style'
 import { useBrickProps } from './Brick.spring'
 
 const AnimatedBrickContainer = animated(BrickContainer)
@@ -25,32 +24,12 @@ const Brick = ({ id, icon, label, active, onClick, a }) => {
       active={active}
       style={{ ...brickProps, zIndex: brickZIndex }}
     >
-      <FontAwesomeIcon className="brick-icon" icon={icon} />
-      <div className="brick-label">{label}</div>
+      <BrickIcon icon={icon} />
+      <BrickLabel color={a.color} categoryTypeActive={a.categoryTypeActive}>
+        {label}
+      </BrickLabel>
     </AnimatedBrickContainer>
   )
-}
-
-{
-  /* <AnimatedBrick
-              key={code}
-              onClick={() => {
-                if (state === 'construct' || state === 'explore') {
-                  onBrickClick(code)
-                }
-              }}
-              style={{ ...brickProps, zIndex: brickZIndex }}
-            >
-              <BrickIcon icon={[iconType, icon]} />
-              <BrickLabel
-                color={color}
-                state={state}
-                categoryType={categoryType}
-                categoryTypeActive={categoryTypeActive}
-              >
-                {description}
-              </BrickLabel>
-            </AnimatedBrick> */
 }
 
 Brick.propTypes = {

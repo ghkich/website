@@ -150,7 +150,11 @@ const Logo = ({ bricks, state, categoryTypeActive, onBrickClick }) => {
               label={description}
               active={categoryTypeActive}
               a={{ categoryType, categoryTypeActive, color, row, col, index }}
-              onClick={onBrickClick}
+              onClick={() => {
+                if (state === 'construct' || state === 'explore') {
+                  onBrickClick(code)
+                }
+              }}
             />
           )
         }

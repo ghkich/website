@@ -4,18 +4,14 @@ import Colors from '../../config/colors'
 
 const BrickContainer = styled.button`
   display: flex;
-  width: 60px;
-  height: 60px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: ${props => Colors[props.color]};
-  color: ${Colors.black};
   outline: none;
   cursor: pointer;
-  transition: transform 0.15s linear, filter 0.15s linear;
   overflow: hidden;
+  transition: transform 0.15s linear;
   position: absolute;
   z-index: 3;
 
@@ -23,7 +19,7 @@ const BrickContainer = styled.button`
     transform: scale(1.2);
     box-shadow: 0 0 12px 1.2px rgba(0, 0, 0, 0.15);
     overflow: visible !important;
-    z-index: 4;
+    z-index: 4 !important;
   }
 `
 
@@ -33,9 +29,10 @@ const BrickIcon = styled(FontAwesomeIcon)`
 `
 
 const BrickLabel = styled.div`
+  display: ${props =>
+    props.categoryType === props.categoryTypeActive ? 'block' : 'none'};
   width: 180px;
   text-align: left;
-  font-size: 12px;
   color: ${props => Colors[props.color]};
   position: absolute;
   right: -200px;
