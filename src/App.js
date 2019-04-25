@@ -1,45 +1,41 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react'
 import Header from './components/Header/Header'
 import { GlobalStyle } from './App.style'
-// import Api from './utils/api'
+import useFetch from './utils/fetch'
+import Logo from './components/Logo/Logo'
 
-import { requestCategoryTypes as requestCategoryTypesAction } from './state/categoryTypes'
+const App = () => {
+  const categoryTypes = useFetch('/categoryTypes')
+  const categories = useFetch('/categories')
+  console.log(categories)
 
-const App = ({ categoryTypes, requestCategoryTypes }) => {
-  useEffect(() => {
-    requestCategoryTypes()
+  // Api.get('categories?lang=pt-BR').then(response => {
+  //   dispatch({
+  //     type: 'CATEGORIES_SUCCEEDED',
+  //     payload: response.data
+  //   })
 
-    // Api.get('categories?lang=pt-BR').then(response => {
-    //   dispatch({
-    //     type: 'CATEGORIES_SUCCEEDED',
-    //     payload: response.data
-    //   })
-
-    //   // if (state.logoState === 'identify') {
-    //   //   setTimeout(() => {
-    //   //     dispatch({
-    //   //       type: 'LOGO_STATE_CHANGED',
-    //   //       payload: 'discover'
-    //   //     })
-    //   //   }, 300)
-    //   //   setTimeout(() => {
-    //   //     dispatch({
-    //   //       type: 'LOGO_STATE_CHANGED',
-    //   //       payload: 'connect'
-    //   //     })
-    //   //   }, 800)
-    //   //   setTimeout(() => {
-    //   //     dispatch({
-    //   //       type: 'LOGO_STATE_CHANGED',
-    //   //       payload: 'construct'
-    //   //     })
-    //   //   }, 1100)
-    //   // }
-    // })
-  }, [])
+  //   // if (state.logoState === 'identify') {
+  //   //   setTimeout(() => {
+  //   //     dispatch({
+  //   //       type: 'LOGO_STATE_CHANGED',
+  //   //       payload: 'discover'
+  //   //     })
+  //   //   }, 300)
+  //   //   setTimeout(() => {
+  //   //     dispatch({
+  //   //       type: 'LOGO_STATE_CHANGED',
+  //   //       payload: 'connect'
+  //   //     })
+  //   //   }, 800)
+  //   //   setTimeout(() => {
+  //   //     dispatch({
+  //   //       type: 'LOGO_STATE_CHANGED',
+  //   //       payload: 'construct'
+  //   //     })
+  //   //   }, 1100)
+  //   // }
+  // })
 
   const handleCategoryTypeClick = categoryType => {
     console.log(categoryType)
@@ -64,7 +60,11 @@ const App = ({ categoryTypes, requestCategoryTypes }) => {
     // }
   }
 
-  if (!categoryTypes) {
+  if (categoryTypes.error) {
+    return <div>ERRO</div>
+  }
+
+  if (!categoryTypes.data) {
     return <div>Loading...</div>
   }
 
@@ -80,28 +80,11 @@ const App = ({ categoryTypes, requestCategoryTypes }) => {
           }}
         />
       )}
+      {categories.data && <Logo bricks={categories.data} />}
     </React.Fragment>
   )
 }
 
-App.propTypes = {
-  categoryTypes: PropTypes.object.isRequired,
-  requestCategoryTypes: PropTypes.func.isRequired
-}
+App.propTypes = {}
 
-const mapStateToProps = ({ categoryTypes }) => ({
-  categoryTypes
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      requestCategoryTypes: () => requestCategoryTypesAction()
-    },
-    dispatch
-  )
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default App

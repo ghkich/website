@@ -17,8 +17,6 @@ const BrickContainer = styled.button`
   transition: transform 0.15s linear, filter 0.15s linear;
   overflow: hidden;
   position: absolute;
-  top: ${props => props.position.top};
-  left: ${props => props.position.left};
   z-index: 3;
 
   :hover {

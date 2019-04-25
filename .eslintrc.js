@@ -33,8 +33,8 @@ module.exports = {
         peerDependencies: false
       }
     ],
-    // 'react-hooks/rules-of-hooks': 'warn',
-    // 'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     semi: [2, 'never'],
     quotes: ['error', 'single'],
     'no-console': 1

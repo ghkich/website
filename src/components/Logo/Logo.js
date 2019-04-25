@@ -4,9 +4,7 @@ import {
   LogoContainer,
   CenterBrickContainer,
   CenterBrickImage,
-  BrickContainer,
-  BrickIcon,
-  BrickLabel
+  BrickIcon
 } from './Logo.style'
 import { importAndAddIcons } from '../../utils/fontawesome'
 import { useSpring, animated, config } from 'react-spring'
@@ -17,12 +15,11 @@ import {
   brickIconFontSize
 } from '../../config/sizes'
 import Colors from '../../config/colors'
-import { useBrickProps } from './Logo.spring'
+import Brick from '../Brick/Brick'
 
 importAndAddIcons()
 
 const AnimatedLogo = animated(LogoContainer)
-const AnimatedBrick = animated(BrickContainer)
 const AnimatedCenterBrick = animated(CenterBrickContainer)
 const AnimatedCenterImage = animated(CenterBrickImage)
 
@@ -145,36 +142,16 @@ const Logo = ({ bricks, state, categoryTypeActive, onBrickClick }) => {
           { code, categoryType, description, icon, iconType, color, row, col },
           index
         ) => {
-          const [brickProps, brickZIndex] = useBrickProps(
-            state,
-            categoryType,
-            categoryTypeActive,
-            color,
-            col,
-            row,
-            index
-          )
-
           return (
-            <AnimatedBrick
+            <Brick
               key={code}
-              onClick={() => {
-                if (state === 'construct' || state === 'explore') {
-                  onBrickClick(code)
-                }
-              }}
-              style={{ ...brickProps, zIndex: brickZIndex }}
-            >
-              <BrickIcon icon={[iconType, icon]} />
-              <BrickLabel
-                color={color}
-                state={state}
-                categoryType={categoryType}
-                categoryTypeActive={categoryTypeActive}
-              >
-                {description}
-              </BrickLabel>
-            </AnimatedBrick>
+              id={code}
+              icon={[iconType, icon]}
+              label={description}
+              active={categoryTypeActive}
+              a={{ categoryType, categoryTypeActive, color, row, col, index }}
+              onClick={onBrickClick}
+            />
           )
         }
       )}
