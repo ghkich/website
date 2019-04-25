@@ -18,10 +18,8 @@ const Brick = ({ id, icon, label, active, onClick, a }) => {
   )
   return (
     <AnimatedBrickContainer
-      onClick={() => {
-        onClick(id)
-      }}
       active={active}
+      onClick={() => onClick(id)}
       style={{ ...brickProps, zIndex: brickZIndex }}
     >
       <BrickIcon icon={icon} />

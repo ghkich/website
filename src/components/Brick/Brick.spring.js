@@ -1,6 +1,6 @@
 import { useSpring, config } from 'react-spring'
 import ColorTransformer from 'color'
-import { logoWidth, brickSize } from '../../config/sizes'
+import { logoWidth, navWidth, brickSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 import { shuffleArray } from '../../utils/arrays'
 
@@ -39,8 +39,8 @@ export const useBrickProps = (
     from: {
       width: brickSize,
       height: brickSize,
-      top: 120,
-      left: 120,
+      top: brickSize * 2,
+      left: brickSize * 2,
       borderRadius: '50%',
       backgroundColor: Colors.gray400,
       opacity: 1
@@ -55,9 +55,7 @@ export const useBrickProps = (
       },
       config: config.default
     })
-  }
-
-  if (state === 'construct') {
+  } else if (state === 'construct') {
     setBrickProps({
       to: {
         top: (row - 1) * brickSize,
@@ -66,30 +64,27 @@ export const useBrickProps = (
       },
       config: config.default
     })
-  }
-
-  if (state === 'explore') {
+  } else if (state === 'explore') {
     if (categoryType === categoryTypeActive) {
-      brickZIndex = 3
       setBrickProps({
         to: {
-          width: 90,
-          height: 90,
+          width: navWidth / 4,
+          height: navWidth / 4,
           top: 0,
-          left: index * 90,
+          left: index * (navWidth / 4),
           opacity: 1,
           backgroundColor: Colors[color]
         },
         config: config.default
       })
+      brickZIndex = 3
     } else {
-      brickZIndex = 1
       setBrickProps({
         to: {
-          width: 90,
-          height: 90,
+          width: navWidth / 4,
+          height: navWidth / 4,
           top: 0,
-          left: index * 90,
+          left: index * (navWidth / 4),
           opacity: 1,
           backgroundColor: ColorTransformer(Colors[color])
             .desaturate(0.85)
@@ -97,16 +92,14 @@ export const useBrickProps = (
         },
         config: config.default
       })
+      brickZIndex = 1
     }
   } else {
-    if (state === 'construct') {
-      setBrickProps({
-        width: brickSize,
-        height: brickSize,
-        opacity: 1,
-        backgroundColor: Colors[color]
-      })
-    }
+    setBrickProps({
+      width: brickSize,
+      height: brickSize,
+      opacity: 1
+    })
   }
 
   return [brickProps, brickZIndex]
