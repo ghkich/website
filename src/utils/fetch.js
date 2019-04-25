@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 
-const useFetch = url => {
+const baseUrl = 'http://192.168.1.9'
+
+const useFetch = endpointUrl => {
   const [data, setData] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetch(`http://192.168.1.9/${url}`)
+    fetch(`${baseUrl}/${endpointUrl}`)
       .then(res => res.json())
       .then(data => {
         setData(data)
@@ -13,7 +15,7 @@ const useFetch = url => {
       .catch(err => {
         setError(err)
       })
-  }, [url])
+  }, [endpointUrl])
 
   return { data, error }
 }
