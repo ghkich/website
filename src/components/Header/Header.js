@@ -7,7 +7,7 @@ import {
   HeaderNavLink,
   HeaderNavLinkIcon
 } from './Header.style'
-import { useHeaderActiveLink, useLogoFormat } from '../../state/context'
+import { useHeaderActiveLink, useLogoFormat } from '../../state/action-hooks'
 
 const Header = ({ links }) => {
   const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()

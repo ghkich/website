@@ -1,6 +1,6 @@
 import React from 'react'
 import { GlobalStyle } from './App.style'
-import { useLogoFormat } from '../../state/context'
+import { useLogoFormat } from '../../state/action-hooks'
 import Header from '../Header/Header'
 import LogoContainer from '../LogoContainer/LogoContainer'
 import useFetch from '../../utils/fetch'

@@ -16,7 +16,7 @@ import {
 } from '../../config/sizes'
 import Colors from '../../config/colors'
 import LogoBrick from '../LogoBrick/LogoBrick'
-import { useLogoFormat, useHeaderActiveLink } from '../../state/context'
+import { useLogoFormat, useHeaderActiveLink } from '../../state/action-hooks'
 
 importAndAddIcons()
 

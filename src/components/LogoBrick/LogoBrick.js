@@ -7,7 +7,7 @@ import {
   useHeaderActiveLink,
   useLogoFormat,
   useLogoActiveBrick
-} from '../../state/context'
+} from '../../state/action-hooks'
 
 const AnimatedBrickContainer = animated(BrickContainer)
 
