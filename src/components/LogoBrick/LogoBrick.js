@@ -6,9 +6,9 @@ import { useBrickProps } from './LogoBrick.spring'
 
 const AnimatedBrickContainer = animated(BrickContainer)
 
-const Brick = ({ brick, logoState, categoryTypeActive, active, index }) => {
+const Brick = ({ brick, logoFormat, categoryTypeActive, active, index }) => {
   const [brickProps, brickZIndex] = useBrickProps(
-    logoState,
+    logoFormat,
     brick,
     categoryTypeActive,
     index
@@ -38,7 +38,7 @@ Brick.propTypes = {
     col: PropTypes.string.isRequired,
     row: PropTypes.string.isRequired
   }),
-  logoState: PropTypes.string.isRequired,
+  logoFormat: PropTypes.string.isRequired,
   categoryTypeActive: PropTypes.string.isRequired,
   active: PropTypes.bool,
   index: PropTypes.number.isRequired

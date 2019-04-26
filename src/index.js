@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { StateProvider } from './state/provider'
+import { StateProvider } from './state/context'
 import App from './components/App/App'
 
 const Root = () => {

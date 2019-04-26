@@ -40,7 +40,7 @@ const getValue = categoryTypeActive => {
 
 const LogoContainer = ({
   bricks,
-  state,
+  format,
   categoryTypeActive,
   categoryActive
 }) => {
@@ -80,13 +80,13 @@ const LogoContainer = ({
     }
   }))
 
-  if (state === 'connect') {
+  if (format === 'connect') {
     setCenterBrickProps({
       backgroundColor: Colors.bio
     })
   }
 
-  if (state === 'construct') {
+  if (format === 'construct') {
     setImageProps({
       opacity: 0
     })
@@ -104,7 +104,7 @@ const LogoContainer = ({
     })
   }
 
-  if (state === 'explore') {
+  if (format === 'explore') {
     setCenterBrickProps({
       width: 90,
       height: 90,
@@ -128,13 +128,13 @@ const LogoContainer = ({
 
   return (
     <AnimatedLogo
-      state={state}
+      format={format}
       style={{
         ...logoProps,
         transform: translateLogo.x.interpolate(x => `translateX(-${x}px)`)
       }}
     >
-      <AnimatedCenterBrick style={centerBrickProps} state={state}>
+      <AnimatedCenterBrick style={centerBrickProps} format={format}>
         <AnimatedCenterImage
           src={ImgCenterBrick}
           alt="Gustavo Henrique Kich"
@@ -147,7 +147,7 @@ const LogoContainer = ({
           <LogoBrick
             key={brick.code}
             brick={brick}
-            logoState={state}
+            logoFormat={format}
             active={categoryActive}
             categoryTypeActive={categoryTypeActive}
             index={index}
@@ -171,7 +171,7 @@ LogoContainer.propTypes = {
       row: PropTypes.string.isRequired
     })
   ),
-  state: PropTypes.oneOf([
+  format: PropTypes.oneOf([
     'identify',
     'discover',
     'connect',

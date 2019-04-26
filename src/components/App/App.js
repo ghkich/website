@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { GlobalStyle } from './App.style'
-import { useStateValue, types } from '../../state/provider'
+import { useLogoFormat } from '../../state/context'
 import Header from '../Header/Header'
 import LogoContainer from '../LogoContainer/LogoContainer'
 import useFetch from '../../utils/fetch'
@@ -9,30 +9,30 @@ const App = () => {
   const categoryTypes = useFetch('/categoryTypes')
   const categories = useFetch('/categories')
 
-  const [{ logoState }, dispatch] = useStateValue()
+  const [logoFormat, setLogoFormat] = useLogoFormat()
 
   const [categoryTypeActive, setCategoryTypeActive] = useState('')
   const [categoryActive, setCategoryActive] = useState('')
 
-  if (logoState === 'identify') {
+  if (logoFormat === 'identify') {
     setTimeout(() => {
-      dispatch({ type: types.LOGO_STATE_CHANGED, logoState: 'discover' })
+      setLogoFormat('discover')
     }, 300)
     setTimeout(() => {
-      dispatch({ type: types.LOGO_STATE_CHANGED, logoState: 'connect' })
+      setLogoFormat('connect')
     }, 800)
     setTimeout(() => {
-      dispatch({ type: types.LOGO_STATE_CHANGED, logoState: 'construct' })
+      setLogoFormat('construct')
     }, 1100)
   }
 
   const handleCategoryTypeClick = categoryType => {
     if (categoryType !== categoryTypeActive) {
       setCategoryTypeActive(categoryType)
-      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'explore' })
+      setLogoFormat('explore')
     } else {
       setCategoryTypeActive('')
-      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'construct' })
+      setLogoFormat('construct')
     }
   }
 
@@ -65,7 +65,7 @@ const App = () => {
       {categories.data && (
         <LogoContainer
           bricks={categories.data}
-          state={logoState}
+          format={logoFormat}
           categoryTypeActive={categoryTypeActive}
           categoryActive={categoryActive}
           onBrickClick={category => handleCategoryClick(category)}

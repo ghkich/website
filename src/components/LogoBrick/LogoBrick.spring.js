@@ -11,7 +11,7 @@ const bricksIndexes = [...Array(bricksCount).keys()]
 shuffleArray(bricksIndexes)
 
 export const useBrickProps = (
-  logoState,
+  logoFormat,
   { categoryType, color, col, row },
   categoryTypeActive,
   index
@@ -45,14 +45,14 @@ export const useBrickProps = (
     config: config.gentle
   }))
 
-  if (logoState === 'connect') {
+  if (logoFormat === 'connect') {
     setBrickProps({
       to: {
         backgroundColor: Colors[color]
       },
       config: config.default
     })
-  } else if (logoState === 'construct') {
+  } else if (logoFormat === 'construct') {
     setBrickProps({
       to: {
         top: (row - 1) * brickSize,
@@ -61,7 +61,7 @@ export const useBrickProps = (
       },
       config: config.default
     })
-  } else if (logoState === 'explore') {
+  } else if (logoFormat === 'explore') {
     if (categoryType === categoryTypeActive) {
       setBrickProps({
         to: {
