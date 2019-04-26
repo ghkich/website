@@ -3,24 +3,44 @@ import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
 import { BrickContainer, BrickIcon, BrickLabel } from './LogoBrick.style'
 import { useBrickProps } from './LogoBrick.spring'
+import {
+  useHeaderActiveLink,
+  useLogoFormat,
+  useLogoActiveBrick
+} from '../../state/context'
 
 const AnimatedBrickContainer = animated(BrickContainer)
 
-const Brick = ({ brick, logoFormat, categoryTypeActive, active, index }) => {
+const Brick = ({ brick, index }) => {
+  const [headerActiveLink] = useHeaderActiveLink()
+  const [logoFormat] = useLogoFormat()
+  const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
+
   const [brickProps, brickZIndex] = useBrickProps(
     logoFormat,
     brick,
-    categoryTypeActive,
+    headerActiveLink,
     index
   )
+
+  const handleBrickClick = brick => {
+    if (brick !== logoActiveBrick) {
+      setLogoActiveBrick(brick)
+    } else {
+      setLogoActiveBrick('')
+    }
+  }
+
   return (
     <AnimatedBrickContainer
-      active={active}
-      onClick={() => {}}
+      active={logoActiveBrick === headerActiveLink}
+      onClick={() => {
+        handleBrickClick(brick.code)
+      }}
       style={{ ...brickProps, zIndex: brickZIndex }}
     >
       <BrickIcon icon={[brick.iconType, brick.icon]} />
-      <BrickLabel color={brick.color} categoryTypeActive={categoryTypeActive}>
+      <BrickLabel color={brick.color} headerActiveLink={headerActiveLink}>
         {brick.label}
       </BrickLabel>
     </AnimatedBrickContainer>
@@ -38,14 +58,7 @@ Brick.propTypes = {
     col: PropTypes.string.isRequired,
     row: PropTypes.string.isRequired
   }),
-  logoFormat: PropTypes.string.isRequired,
-  categoryTypeActive: PropTypes.string.isRequired,
-  active: PropTypes.bool,
   index: PropTypes.number.isRequired
-}
-
-Brick.defaultProps = {
-  active: false
 }
 
 export default Brick

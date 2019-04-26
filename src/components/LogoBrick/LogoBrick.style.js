@@ -30,7 +30,7 @@ const BrickIcon = styled(FontAwesomeIcon)`
 
 const BrickLabel = styled.div`
   display: ${props =>
-    props.categoryType === props.categoryTypeActive ? 'block' : 'none'};
+    props.categoryType === props.headerActiveLink ? 'block' : 'none'};
   width: 180px;
   text-align: left;
   color: ${props => Colors[props.color]};

@@ -13,7 +13,7 @@ shuffleArray(bricksIndexes)
 export const useBrickProps = (
   logoFormat,
   { categoryType, color, col, row },
-  categoryTypeActive,
+  headerActiveLink,
   index
 ) => {
   let brickZIndex = 1
@@ -62,7 +62,7 @@ export const useBrickProps = (
       config: config.default
     })
   } else if (logoFormat === 'explore') {
-    if (categoryType === categoryTypeActive) {
+    if (categoryType === headerActiveLink) {
       setBrickProps({
         to: {
           width: navWidth / 4,

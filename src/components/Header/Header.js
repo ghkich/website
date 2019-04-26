@@ -7,19 +7,33 @@ import {
   HeaderNavLink,
   HeaderNavLinkIcon
 } from './Header.style'
+import { useHeaderActiveLink, useLogoFormat } from '../../state/context'
 
-const Header = ({ links, activeLink, onLinkClick }) => {
+const Header = ({ links }) => {
+  const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()
+  const [, setLogoFormat] = useLogoFormat()
+
+  const handleLinkClick = link => {
+    if (link !== headerActiveLink) {
+      setHeaderActiveLink(link)
+      setLogoFormat('explore')
+    } else {
+      setHeaderActiveLink('')
+      setLogoFormat('construct')
+    }
+  }
+
   return (
     <HeaderContainer>
       <HeaderNav>
         {links.map(link => {
-          const active = link.code === activeLink
+          const active = link.code === headerActiveLink
           return (
             <HeaderNavLink
               key={link.code}
               code={link.code}
               active={active}
-              onClick={() => onLinkClick(link.code)}
+              onClick={() => handleLinkClick(link.code)}
             >
               {active && <HeaderNavLinkIcon icon={faChevronLeft} />}
               {active ? link.description.slice(0, 3) : link.description}
@@ -37,9 +51,7 @@ Header.propTypes = {
       code: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired
     })
-  ).isRequired,
-  activeLink: PropTypes.string.isRequired,
-  onLinkClick: PropTypes.func.isRequired
+  ).isRequired
 }
 
 export default Header

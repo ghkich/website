@@ -16,6 +16,7 @@ import {
 } from '../../config/sizes'
 import Colors from '../../config/colors'
 import LogoBrick from '../LogoBrick/LogoBrick'
+import { useLogoFormat, useHeaderActiveLink } from '../../state/context'
 
 importAndAddIcons()
 
@@ -25,28 +26,26 @@ const AnimatedCenterImage = animated(CenterBrickImage)
 
 const ImgCenterBrick = require('../../images/eu.jpg')
 
-const getValue = categoryTypeActive => {
-  if (categoryTypeActive === 'cad') {
+const getValue = headerActiveLink => {
+  if (headerActiveLink === 'cad') {
     return 90 * 4
   }
-  if (categoryTypeActive === 'lif') {
+  if (headerActiveLink === 'lif') {
     return 90 * 8
   }
-  if (categoryTypeActive === 'hob') {
+  if (headerActiveLink === 'hob') {
     return 90 * 12
   }
   return 0
 }
 
-const LogoContainer = ({
-  bricks,
-  format,
-  categoryTypeActive,
-  categoryActive
-}) => {
+const LogoContainer = ({ bricks }) => {
+  const [logoFormat] = useLogoFormat()
+  const [headerActiveLink] = useHeaderActiveLink()
+
   const translateLogo = useSpring({
     to: {
-      x: getValue(categoryTypeActive)
+      x: getValue(headerActiveLink)
     },
     config: config.default
   })
@@ -80,13 +79,13 @@ const LogoContainer = ({
     }
   }))
 
-  if (format === 'connect') {
+  if (logoFormat === 'connect') {
     setCenterBrickProps({
       backgroundColor: Colors.bio
     })
   }
 
-  if (format === 'construct') {
+  if (logoFormat === 'construct') {
     setImageProps({
       opacity: 0
     })
@@ -104,7 +103,7 @@ const LogoContainer = ({
     })
   }
 
-  if (format === 'explore') {
+  if (logoFormat === 'explore') {
     setCenterBrickProps({
       width: 90,
       height: 90,
@@ -128,13 +127,13 @@ const LogoContainer = ({
 
   return (
     <AnimatedLogo
-      format={format}
+      logoFormat={logoFormat}
       style={{
         ...logoProps,
         transform: translateLogo.x.interpolate(x => `translateX(-${x}px)`)
       }}
     >
-      <AnimatedCenterBrick style={centerBrickProps} format={format}>
+      <AnimatedCenterBrick style={centerBrickProps} logoFormat={logoFormat}>
         <AnimatedCenterImage
           src={ImgCenterBrick}
           alt="Gustavo Henrique Kich"
@@ -143,16 +142,7 @@ const LogoContainer = ({
         <BrickIcon icon={['fas', 'user']} style={iconProps} />
       </AnimatedCenterBrick>
       {bricks.map((brick, index) => {
-        return (
-          <LogoBrick
-            key={brick.code}
-            brick={brick}
-            logoFormat={format}
-            active={categoryActive}
-            categoryTypeActive={categoryTypeActive}
-            index={index}
-          />
-        )
+        return <LogoBrick key={brick.code} brick={brick} index={index} />
       })}
     </AnimatedLogo>
   )
@@ -170,18 +160,7 @@ LogoContainer.propTypes = {
       col: PropTypes.string.isRequired,
       row: PropTypes.string.isRequired
     })
-  ),
-  format: PropTypes.oneOf([
-    'identify',
-    'discover',
-    'connect',
-    'construct',
-    'imagine',
-    'explore'
-  ]).isRequired,
-  categoryTypeActive: PropTypes.string.isRequired,
-  categoryActive: PropTypes.string.isRequired,
-  onBrickClick: PropTypes.func.isRequired
+  )
 }
 
 export default LogoContainer

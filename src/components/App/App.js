@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { GlobalStyle } from './App.style'
 import { useLogoFormat } from '../../state/context'
 import Header from '../Header/Header'
@@ -10,9 +10,6 @@ const App = () => {
   const categories = useFetch('/categories')
 
   const [logoFormat, setLogoFormat] = useLogoFormat()
-
-  const [categoryTypeActive, setCategoryTypeActive] = useState('')
-  const [categoryActive, setCategoryActive] = useState('')
 
   if (logoFormat === 'identify') {
     setTimeout(() => {
@@ -26,24 +23,6 @@ const App = () => {
     }, 1100)
   }
 
-  const handleCategoryTypeClick = categoryType => {
-    if (categoryType !== categoryTypeActive) {
-      setCategoryTypeActive(categoryType)
-      setLogoFormat('explore')
-    } else {
-      setCategoryTypeActive('')
-      setLogoFormat('construct')
-    }
-  }
-
-  const handleCategoryClick = category => {
-    if (category !== categoryActive) {
-      setCategoryActive(category)
-    } else {
-      setCategoryActive('')
-    }
-  }
-
   if (categoryTypes.error || categories.error) {
     return <div>ERRO</div>
   }
@@ -55,22 +34,8 @@ const App = () => {
   return (
     <React.Fragment>
       <GlobalStyle />
-      {categoryTypes.data && (
-        <Header
-          links={categoryTypes.data}
-          activeLink={categoryTypeActive}
-          onLinkClick={categoryType => handleCategoryTypeClick(categoryType)}
-        />
-      )}
-      {categories.data && (
-        <LogoContainer
-          bricks={categories.data}
-          format={logoFormat}
-          categoryTypeActive={categoryTypeActive}
-          categoryActive={categoryActive}
-          onBrickClick={category => handleCategoryClick(category)}
-        />
-      )}
+      {categoryTypes.data && <Header links={categoryTypes.data} />}
+      {categories.data && <LogoContainer bricks={categories.data} />}
     </React.Fragment>
   )
 }
