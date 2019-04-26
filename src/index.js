@@ -1,38 +1,39 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-
 import { GlobalStyle } from './index.style'
+import { StateProvider, useStateValue, types } from './state/provider'
 import Header from './components/Header/Header'
-import Logo from './components/Logo/Logo'
+import LogoContainer from './components/LogoContainer/LogoContainer'
 import useFetch from './utils/fetch'
 
 const App = () => {
   const categoryTypes = useFetch('/categoryTypes')
   const categories = useFetch('/categories')
 
-  const [logoState, setLogoState] = useState('identify')
+  const [{ logoState }, dispatch] = useStateValue()
+
   const [categoryTypeActive, setCategoryTypeActive] = useState('')
   const [categoryActive, setCategoryActive] = useState('')
 
   if (logoState === 'identify') {
     setTimeout(() => {
-      setLogoState('discover')
+      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'discover' })
     }, 300)
     setTimeout(() => {
-      setLogoState('connect')
+      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'connect' })
     }, 800)
     setTimeout(() => {
-      setLogoState('construct')
+      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'construct' })
     }, 1100)
   }
 
   const handleCategoryTypeClick = categoryType => {
     if (categoryType !== categoryTypeActive) {
       setCategoryTypeActive(categoryType)
-      setLogoState('explore')
+      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'explore' })
     } else {
       setCategoryTypeActive('')
-      setLogoState('construct')
+      dispatch({ type: types.LOGO_STATE_CHANGED, state: 'construct' })
     }
   }
 
@@ -55,22 +56,24 @@ const App = () => {
   return (
     <React.Fragment>
       <GlobalStyle />
-      {categoryTypes.data && (
-        <Header
-          links={categoryTypes.data}
-          activeLink={categoryTypeActive}
-          onLinkClick={categoryType => handleCategoryTypeClick(categoryType)}
-        />
-      )}
-      {categories.data && (
-        <Logo
-          bricks={categories.data}
-          state={logoState}
-          categoryTypeActive={categoryTypeActive}
-          categoryActive={categoryActive}
-          onBrickClick={category => handleCategoryClick(category)}
-        />
-      )}
+      <StateProvider>
+        {categoryTypes.data && (
+          <Header
+            links={categoryTypes.data}
+            activeLink={categoryTypeActive}
+            onLinkClick={categoryType => handleCategoryTypeClick(categoryType)}
+          />
+        )}
+        {categories.data && (
+          <LogoContainer
+            bricks={categories.data}
+            state={logoState}
+            categoryTypeActive={categoryTypeActive}
+            categoryActive={categoryActive}
+            onBrickClick={category => handleCategoryClick(category)}
+          />
+        )}
+      </StateProvider>
     </React.Fragment>
   )
 }

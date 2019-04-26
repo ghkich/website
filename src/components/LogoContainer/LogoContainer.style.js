@@ -8,7 +8,7 @@ import {
 } from '../../config/sizes'
 import Colors from '../../config/colors'
 
-const LogoContainer = styled.div`
+const Container = styled.div`
   width: ${logoWidth}px;
   height: ${logoWidth}px;
   margin-left: auto;
@@ -73,7 +73,7 @@ const BrickLabel = styled.div`
 `
 
 export {
-  LogoContainer,
+  Container,
   CenterBrickContainer,
   CenterBrickImage,
   BrickContainer,

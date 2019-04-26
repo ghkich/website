@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  LogoContainer,
+  Container,
   CenterBrickContainer,
   CenterBrickImage,
   BrickIcon
-} from './Logo.style'
+} from './LogoContainer.style'
 import { importAndAddIcons } from '../../utils/fontawesome'
 import { useSpring, animated, config } from 'react-spring'
 import {
@@ -15,11 +15,11 @@ import {
   brickIconFontSize
 } from '../../config/sizes'
 import Colors from '../../config/colors'
-import Brick from '../Brick/Brick'
+import LogoBrick from '../LogoBrick/LogoBrick'
 
 importAndAddIcons()
 
-const AnimatedLogo = animated(LogoContainer)
+const AnimatedLogo = animated(Container)
 const AnimatedCenterBrick = animated(CenterBrickContainer)
 const AnimatedCenterImage = animated(CenterBrickImage)
 
@@ -38,12 +38,11 @@ const getValue = categoryTypeActive => {
   return 0
 }
 
-const Logo = ({
+const LogoContainer = ({
   bricks,
   state,
   categoryTypeActive,
-  categoryActive,
-  onBrickClick
+  categoryActive
 }) => {
   const translateLogo = useSpring({
     to: {
@@ -143,41 +142,23 @@ const Logo = ({
         />
         <BrickIcon icon={['fas', 'user']} style={iconProps} />
       </AnimatedCenterBrick>
-      {bricks.map(
-        (
-          { code, categoryType, description, icon, iconType, color, row, col },
-          index
-        ) => {
-          return (
-            <Brick
-              key={code}
-              id={code}
-              icon={[iconType, icon]}
-              label={description}
-              active={categoryActive}
-              a={{
-                state,
-                categoryType,
-                categoryTypeActive,
-                color,
-                row,
-                col,
-                index
-              }}
-              onClick={() => {
-                if (state === 'construct' || state === 'explore') {
-                  onBrickClick(code)
-                }
-              }}
-            />
-          )
-        }
-      )}
+      {bricks.map((brick, index) => {
+        return (
+          <LogoBrick
+            key={brick.code}
+            brick={brick}
+            logoState={state}
+            active={categoryActive}
+            categoryTypeActive={categoryTypeActive}
+            index={index}
+          />
+        )
+      })}
     </AnimatedLogo>
   )
 }
 
-Logo.propTypes = {
+LogoContainer.propTypes = {
   bricks: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.string.isRequired,
@@ -203,4 +184,4 @@ Logo.propTypes = {
   onBrickClick: PropTypes.func.isRequired
 }
 
-export default Logo
+export default LogoContainer

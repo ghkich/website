@@ -6,7 +6,7 @@ import {
   fireEvent
 } from 'react-testing-library'
 import 'jest-dom/extend-expect'
-import Logo from './Logo'
+import LogoContainer from './LogoContainer'
 
 describe('Logo test', () => {
   const categories = [
@@ -45,7 +45,7 @@ describe('Logo test', () => {
 
   test('if it renders the bricks with state identify', async () => {
     const { getByText } = render(
-      <Logo
+      <LogoContainer
         bricks={categories}
         state="identify"
         onBrickClick={handleBrickClick}
@@ -65,7 +65,7 @@ describe('Logo test', () => {
 
   test('if it renders the bricks with state construct and fire events', async () => {
     const { getByText } = render(
-      <Logo
+      <LogoContainer
         bricks={categories}
         state="construct"
         onBrickClick={handleBrickClick}
