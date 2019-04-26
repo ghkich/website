@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import Colors from './config/colors'
+import Colors from '../../config/colors'
 
 const sanitize = require('sanitize.css') // sanitize some browser differences
 
