@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
 import { BrickContainer, BrickIcon, BrickLabel } from './LogoBrick.style'
-import { useBrickProps } from './LogoBrick.spring'
+import { useBrickSpring } from './LogoBrick.spring'
 import {
   useHeaderActiveLink,
   useLogoFormat,
@@ -16,12 +16,7 @@ const Brick = ({ brick, index }) => {
   const [logoFormat] = useLogoFormat()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
-  const [brickProps, brickZIndex] = useBrickProps(
-    logoFormat,
-    brick,
-    headerActiveLink,
-    index
-  )
+  const brickSpring = useBrickSpring(logoFormat, brick, headerActiveLink, index)
 
   const handleBrickClick = brick => {
     if (brick !== logoActiveBrick) {
@@ -33,11 +28,9 @@ const Brick = ({ brick, index }) => {
 
   return (
     <AnimatedBrickContainer
-      active={logoActiveBrick === headerActiveLink}
-      onClick={() => {
-        handleBrickClick(brick.code)
-      }}
-      style={{ ...brickProps, zIndex: brickZIndex }}
+      active={brick.category === logoActiveBrick}
+      onClick={() => handleBrickClick(brick.code)}
+      style={brickSpring}
     >
       <BrickIcon icon={[brick.iconType, brick.icon]} />
       <BrickLabel color={brick.color} headerActiveLink={headerActiveLink}>

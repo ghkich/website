@@ -10,14 +10,12 @@ const angleInterval = (2 * Math.PI) / bricksCount
 const bricksIndexes = [...Array(bricksCount).keys()]
 shuffleArray(bricksIndexes)
 
-export const useBrickProps = (
+export const useBrickSpring = (
   logoFormat,
   { categoryType, color, col, row },
   headerActiveLink,
   index
 ) => {
-  let brickZIndex = 1
-
   const top = Math.round(
     logoWidth / 2 +
       radius * Math.cos(angleInterval * bricksIndexes[index]) -
@@ -28,7 +26,7 @@ export const useBrickProps = (
       radius * Math.sin(angleInterval * bricksIndexes[index]) -
       brickSize / 2
   )
-  const [brickProps, setBrickProps] = useSpring(() => ({
+  const [brickSpring, setBrickSpring] = useSpring(() => ({
     to: {
       top,
       left
@@ -46,58 +44,42 @@ export const useBrickProps = (
   }))
 
   if (logoFormat === 'connect') {
-    setBrickProps({
+    setBrickSpring({
       to: {
         backgroundColor: Colors[color]
       },
       config: config.default
     })
   } else if (logoFormat === 'construct') {
-    setBrickProps({
+    setBrickSpring({
       to: {
+        width: brickSize,
+        height: brickSize,
         top: (row - 1) * brickSize,
         left: (col - 1) * brickSize,
-        borderRadius: '0%'
+        borderRadius: '0%',
+        backgroundColor: Colors[color]
       },
       config: config.default
     })
   } else if (logoFormat === 'explore') {
-    if (categoryType === headerActiveLink) {
-      setBrickProps({
-        to: {
-          width: navWidth / 4,
-          height: navWidth / 4,
-          top: 0,
-          left: index * (navWidth / 4),
-          opacity: 1,
-          backgroundColor: Colors[color]
-        },
-        config: config.default
-      })
-      brickZIndex = 3
-    } else {
-      setBrickProps({
-        to: {
-          width: navWidth / 4,
-          height: navWidth / 4,
-          top: 0,
-          left: index * (navWidth / 4),
-          opacity: 1,
-          backgroundColor: ColorTransformer(Colors[color])
-            .desaturate(0.85)
-            .hex()
-        },
-        config: config.default
-      })
-      brickZIndex = 1
-    }
-  } else {
-    setBrickProps({
-      width: brickSize,
-      height: brickSize,
-      opacity: 1
+    setBrickSpring({
+      to: {
+        width: navWidth / 4,
+        height: navWidth / 4,
+        top: 0,
+        left: index * (navWidth / 4),
+        opacity: 1,
+        backgroundColor:
+          categoryType === headerActiveLink
+            ? Colors[color]
+            : ColorTransformer(Colors[color])
+                .desaturate(0.85)
+                .hex()
+      },
+      config: config.default
     })
   }
 
-  return [brickProps, brickZIndex]
+  return brickSpring
 }
