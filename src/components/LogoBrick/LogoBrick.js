@@ -11,7 +11,7 @@ import {
 
 const AnimatedBrickContainer = animated(BrickContainer)
 
-const Brick = ({ brick, index }) => {
+const LogoBrick = ({ brick, index }) => {
   const [headerActiveLink] = useHeaderActiveLink()
   const [logoFormat] = useLogoFormat()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
@@ -40,7 +40,7 @@ const Brick = ({ brick, index }) => {
   )
 }
 
-Brick.propTypes = {
+LogoBrick.propTypes = {
   brick: PropTypes.shape({
     code: PropTypes.string.isRequired,
     categoryType: PropTypes.string.isRequired,
@@ -54,4 +54,4 @@ Brick.propTypes = {
   index: PropTypes.number.isRequired
 }
 
-export default Brick
+export default LogoBrick
