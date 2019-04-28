@@ -1,30 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Container,
-  CenterBrickContainer,
-  CenterBrickImage,
-  BrickIcon
-} from './LogoContainer.style'
+import { Container } from './LogoContainer.style'
 import { importAndAddIcons } from '../../utils/fontawesome'
 import { useSpring, animated, config } from 'react-spring'
-import {
-  logoWidth,
-  navWidth,
-  brickSize,
-  brickIconFontSize
-} from '../../config/sizes'
-import Colors from '../../config/colors'
+import { logoWidth, navWidth } from '../../config/sizes'
 import LogoBrick from '../LogoBrick/LogoBrick'
 import { useLogoState, useHeaderActiveLink } from '../../state/action-hooks'
+import LogoCenterBrick from '../LogoCenterBrick/LogoCenterBrick'
 
 importAndAddIcons()
 
 const AnimatedLogo = animated(Container)
-const AnimatedCenterBrick = animated(CenterBrickContainer)
-const AnimatedCenterImage = animated(CenterBrickImage)
-
-const ImgCenterBrick = require('../../images/eu.jpg')
 
 const getValue = headerActiveLink => {
   if (headerActiveLink === 'cad') {
@@ -49,76 +35,20 @@ const LogoContainer = ({ bricks }) => {
     },
     config: config.default
   })
+
   const [logoProps, setLogoProps] = useSpring(() => ({
     from: {
       width: logoWidth,
       marginTop: 100
     }
   }))
-  const [centerBrickProps, setCenterBrickProps] = useSpring(() => ({
-    from: {
-      width: brickSize * 3.5,
-      height: brickSize * 3.5,
-      top: brickSize * 0.75,
-      left: brickSize * 0.75,
-      backgroundColor: Colors.gray400,
-      borderRadius: '50%',
-      opacity: 1
-    }
-  }))
-
-  const [imageProps, setImageProps] = useSpring(() => ({
-    from: {
-      opacity: 1
-    }
-  }))
-
-  const [iconProps, setIconProps] = useSpring(() => ({
-    from: {
-      fontSize: brickIconFontSize * 3.5
-    }
-  }))
-
-  if (logoState === 'connect') {
-    setCenterBrickProps({
-      backgroundColor: Colors.bio
-    })
-  }
-
-  if (logoState === 'construct') {
-    setImageProps({
-      opacity: 0
-    })
-
-    setCenterBrickProps({
-      width: brickSize,
-      height: brickSize,
-      top: brickSize * 2,
-      left: brickSize * 2,
-      borderRadius: '0%'
-    })
-
-    setIconProps({
-      fontSize: brickIconFontSize
-    })
-  }
 
   if (logoState === 'explore') {
-    setCenterBrickProps({
-      width: 90,
-      height: 90,
-      top: 0,
-      left: -90,
-      opacity: 0
-    })
     setLogoProps({
       width: navWidth,
       marginTop: 0
     })
   } else {
-    setCenterBrickProps({
-      opacity: 1
-    })
     setLogoProps({
       width: logoWidth,
       marginTop: 100
@@ -133,14 +63,7 @@ const LogoContainer = ({ bricks }) => {
         transform: translateLogo.x.interpolate(x => `translateX(-${x}px)`)
       }}
     >
-      <AnimatedCenterBrick style={centerBrickProps} logoState={logoState}>
-        <AnimatedCenterImage
-          src={ImgCenterBrick}
-          alt="Gustavo Henrique Kich"
-          style={imageProps}
-        />
-        <BrickIcon icon={['fas', 'user']} style={iconProps} />
-      </AnimatedCenterBrick>
+      <LogoCenterBrick />
       {bricks.map((brick, index) => {
         return <LogoBrick key={brick.code} brick={brick} index={index} />
       })}
