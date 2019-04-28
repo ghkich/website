@@ -1,14 +1,14 @@
 import { useContextState } from './provider'
 import { types } from './reducer'
 
-export const useLogoFormat = () => {
-  const [{ logoFormat }, dispatch] = useContextState()
+export const useLogoState = () => {
+  const [{ logoState }, dispatch] = useContextState()
   return [
-    logoFormat,
+    logoState,
     newLogoForm =>
       dispatch({
-        type: types.LOGO_FORMAT_CHANGED,
-        logoFormat: newLogoForm
+        type: types.LOGO_STATE_CHANGED,
+        logoState: newLogoForm
       })
   ]
 }

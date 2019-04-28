@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const baseUrl = 'http://192.168.1.9'
+const baseUrl = 'http://192.168.1.3'
 
 const useFetch = endpointUrl => {
   const [data, setData] = useState([])

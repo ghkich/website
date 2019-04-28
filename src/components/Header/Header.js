@@ -7,19 +7,19 @@ import {
   HeaderNavLink,
   HeaderNavLinkIcon
 } from './Header.style'
-import { useHeaderActiveLink, useLogoFormat } from '../../state/action-hooks'
+import { useHeaderActiveLink, useLogoState } from '../../state/action-hooks'
 
 const Header = ({ links }) => {
   const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()
-  const [, setLogoFormat] = useLogoFormat()
+  const [, setLogoState] = useLogoState()
 
   const handleLinkClick = link => {
     if (link !== headerActiveLink) {
       setHeaderActiveLink(link)
-      setLogoFormat('explore')
+      setLogoState('explore')
     } else {
       setHeaderActiveLink('')
-      setLogoFormat('construct')
+      setLogoState('construct')
     }
   }
 

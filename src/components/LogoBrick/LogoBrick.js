@@ -5,7 +5,7 @@ import { BrickContainer, BrickIcon, BrickLabel } from './LogoBrick.style'
 import { useBrickSpring } from './LogoBrick.spring'
 import {
   useHeaderActiveLink,
-  useLogoFormat,
+  useLogoState,
   useLogoActiveBrick
 } from '../../state/action-hooks'
 
@@ -13,10 +13,10 @@ const AnimatedBrickContainer = animated(BrickContainer)
 
 const LogoBrick = ({ brick, index }) => {
   const [headerActiveLink] = useHeaderActiveLink()
-  const [logoFormat] = useLogoFormat()
+  const [logoState] = useLogoState()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
-  const brickSpring = useBrickSpring(logoFormat, brick, headerActiveLink, index)
+  const brickSpring = useBrickSpring(logoState, brick, headerActiveLink, index)
 
   const handleBrickClick = brick => {
     if (brick !== logoActiveBrick) {
@@ -32,9 +32,17 @@ const LogoBrick = ({ brick, index }) => {
       onClick={() => handleBrickClick(brick.code)}
       style={brickSpring}
     >
-      <BrickIcon icon={[brick.iconType, brick.icon]} />
-      <BrickLabel color={brick.color} headerActiveLink={headerActiveLink}>
-        {brick.label}
+      <BrickIcon
+        icon={[brick.iconType, brick.icon]}
+        categoryType={brick.categoryType}
+        headerActiveLink={headerActiveLink}
+      />
+      <BrickLabel
+        color={brick.color}
+        categoryType={brick.categoryType}
+        headerActiveLink={headerActiveLink}
+      >
+        {brick.description}
       </BrickLabel>
     </AnimatedBrickContainer>
   )

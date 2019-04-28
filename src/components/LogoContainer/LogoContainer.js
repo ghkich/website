@@ -16,7 +16,7 @@ import {
 } from '../../config/sizes'
 import Colors from '../../config/colors'
 import LogoBrick from '../LogoBrick/LogoBrick'
-import { useLogoFormat, useHeaderActiveLink } from '../../state/action-hooks'
+import { useLogoState, useHeaderActiveLink } from '../../state/action-hooks'
 
 importAndAddIcons()
 
@@ -40,7 +40,7 @@ const getValue = headerActiveLink => {
 }
 
 const LogoContainer = ({ bricks }) => {
-  const [logoFormat] = useLogoFormat()
+  const [logoState] = useLogoState()
   const [headerActiveLink] = useHeaderActiveLink()
 
   const translateLogo = useSpring({
@@ -79,13 +79,13 @@ const LogoContainer = ({ bricks }) => {
     }
   }))
 
-  if (logoFormat === 'connect') {
+  if (logoState === 'connect') {
     setCenterBrickProps({
       backgroundColor: Colors.bio
     })
   }
 
-  if (logoFormat === 'construct') {
+  if (logoState === 'construct') {
     setImageProps({
       opacity: 0
     })
@@ -103,7 +103,7 @@ const LogoContainer = ({ bricks }) => {
     })
   }
 
-  if (logoFormat === 'explore') {
+  if (logoState === 'explore') {
     setCenterBrickProps({
       width: 90,
       height: 90,
@@ -127,13 +127,13 @@ const LogoContainer = ({ bricks }) => {
 
   return (
     <AnimatedLogo
-      logoFormat={logoFormat}
+      logoState={logoState}
       style={{
         ...logoProps,
         transform: translateLogo.x.interpolate(x => `translateX(-${x}px)`)
       }}
     >
-      <AnimatedCenterBrick style={centerBrickProps} logoFormat={logoFormat}>
+      <AnimatedCenterBrick style={centerBrickProps} logoState={logoState}>
         <AnimatedCenterImage
           src={ImgCenterBrick}
           alt="Gustavo Henrique Kich"

@@ -30,7 +30,7 @@ const BrickSharedCss = css`
 
 const CenterBrickContainer = styled.button`
   ${BrickSharedCss};
-  display: ${props => (props.logoFormat === 'explore' ? 'none' : 'flex')};
+  display: ${props => (props.logoState === 'explore' ? 'none' : 'flex')};
   z-index: 4;
 `
 

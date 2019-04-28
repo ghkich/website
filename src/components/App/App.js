@@ -1,6 +1,6 @@
 import React from 'react'
 import { GlobalStyle } from './App.style'
-import { useLogoFormat } from '../../state/action-hooks'
+import { useLogoState } from '../../state/action-hooks'
 import Header from '../Header/Header'
 import LogoContainer from '../LogoContainer/LogoContainer'
 import useFetch from '../../utils/fetch'
@@ -9,17 +9,17 @@ const App = () => {
   const categoryTypes = useFetch('/categoryTypes')
   const categories = useFetch('/categories')
 
-  const [logoFormat, setLogoFormat] = useLogoFormat()
+  const [logoState, setLogoState] = useLogoState()
 
-  if (logoFormat === 'identify') {
+  if (logoState === 'identify') {
     setTimeout(() => {
-      setLogoFormat('discover')
+      setLogoState('discover')
     }, 300)
     setTimeout(() => {
-      setLogoFormat('connect')
+      setLogoState('connect')
     }, 800)
     setTimeout(() => {
-      setLogoFormat('construct')
+      setLogoState('construct')
     }, 1100)
   }
 

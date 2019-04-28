@@ -11,7 +11,7 @@ const bricksIndexes = [...Array(bricksCount).keys()]
 shuffleArray(bricksIndexes)
 
 export const useBrickSpring = (
-  logoFormat,
+  logoState,
   { categoryType, color, col, row },
   headerActiveLink,
   index
@@ -43,14 +43,14 @@ export const useBrickSpring = (
     config: config.gentle
   }))
 
-  if (logoFormat === 'connect') {
+  if (logoState === 'connect') {
     setBrickSpring({
       to: {
         backgroundColor: Colors[color]
       },
       config: config.default
     })
-  } else if (logoFormat === 'construct') {
+  } else if (logoState === 'construct') {
     setBrickSpring({
       to: {
         width: brickSize,
@@ -62,7 +62,7 @@ export const useBrickSpring = (
       },
       config: config.default
     })
-  } else if (logoFormat === 'explore') {
+  } else if (logoState === 'explore') {
     setBrickSpring({
       to: {
         width: navWidth / 4,
