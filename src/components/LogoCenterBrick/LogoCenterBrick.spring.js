@@ -27,49 +27,41 @@ export const useCenterBrickSpring = logoState => {
     }
   }))
 
-  if (logoState === 'connect') {
-    setContainerSpring({
-      backgroundColor: Colors.bio
-    })
-  }
+  switch (logoState) {
+    case 'connect':
+      setContainerSpring({
+        backgroundColor: Colors.bio
+      })
+      break
+    case 'construct':
+      setImageSpring({
+        opacity: 0
+      })
 
-  if (logoState === 'construct') {
-    setImageSpring({
-      opacity: 0
-    })
+      setContainerSpring({
+        width: brickSize,
+        height: brickSize,
+        top: brickSize * 2,
+        left: brickSize * 2,
+        borderRadius: '0%'
+      })
 
-    setContainerSpring({
-      width: brickSize,
-      height: brickSize,
-      top: brickSize * 2,
-      left: brickSize * 2,
-      borderRadius: '0%'
-    })
-
-    setIconSpring({
-      fontSize: brickIconFontSize
-    })
-  }
-
-  if (logoState === 'explore') {
-    setContainerSpring({
-      width: navWidth,
-      height: 20,
-      borderBottomRightRadius: 10,
-      borderBottomLeftRadius: 10,
-      top: 90,
-      left: 0,
-      backgroundColor: Colors.white,
-      boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
-    })
-  } else {
-    setContainerSpring({
-      opacity: 1,
-      borderBottomRightRadius: 0,
-      borderBottomLeftRadius: 0,
-      backgroundColor: Colors.bio,
-      boxShadow: '0 5px 10px rgba(0,0,0,0.0)'
-    })
+      setIconSpring({
+        fontSize: brickIconFontSize
+      })
+      break
+    case 'explore':
+      setContainerSpring({
+        width: navWidth,
+        height: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        top: 90,
+        left: 0,
+        backgroundColor: Colors.white,
+        boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
+      })
+      break
   }
 
   return { containerSpring, imageSpring, iconSpring }

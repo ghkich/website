@@ -43,42 +43,46 @@ export const useBrickSpring = (
     config: config.gentle
   }))
 
-  if (logoState === 'connect') {
-    setBrickSpring({
-      to: {
-        backgroundColor: Colors[color]
-      },
-      config: config.default
-    })
-  } else if (logoState === 'construct') {
-    setBrickSpring({
-      to: {
-        width: brickSize,
-        height: brickSize,
-        top: (row - 1) * brickSize,
-        left: (col - 1) * brickSize,
-        borderRadius: '0%',
-        backgroundColor: Colors[color]
-      },
-      config: config.default
-    })
-  } else if (logoState === 'explore') {
-    setBrickSpring({
-      to: {
-        width: navWidth / 4,
-        height: navWidth / 4,
-        top: 0,
-        left: index * (navWidth / 4),
-        opacity: 1,
-        backgroundColor:
-          categoryType === headerActiveLink
-            ? Colors[color]
-            : ColorTransformer(Colors[color])
-                .desaturate(0.85)
-                .hex()
-      },
-      config: config.default
-    })
+  switch (logoState) {
+    case 'connect':
+      setBrickSpring({
+        to: {
+          backgroundColor: Colors[color]
+        },
+        config: config.default
+      })
+      break
+    case 'construct':
+      setBrickSpring({
+        to: {
+          width: brickSize,
+          height: brickSize,
+          top: (row - 1) * brickSize,
+          left: (col - 1) * brickSize,
+          borderRadius: '0%',
+          backgroundColor: Colors[color]
+        },
+        config: config.default
+      })
+      break
+    case 'explore':
+      setBrickSpring({
+        to: {
+          width: navWidth / 4,
+          height: navWidth / 4,
+          top: 0,
+          left: index * (navWidth / 4),
+          opacity: 1,
+          backgroundColor:
+            categoryType === headerActiveLink
+              ? Colors[color]
+              : ColorTransformer(Colors[color])
+                  .desaturate(0.85)
+                  .hex()
+        },
+        config: config.default
+      })
+      break
   }
 
   return brickSpring
