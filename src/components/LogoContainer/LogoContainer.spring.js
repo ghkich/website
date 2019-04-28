@@ -1,113 +1,45 @@
 import { useSpring, config } from 'react-spring'
-import ColorTransformer from 'color'
-import { logoWidth, brickSize } from '../../config/sizes'
-import Colors from '../../config/colors'
-import { shuffleArray } from '../../utils/arrays'
+import { navWidth, logoWidth } from '../../config/sizes'
 
-const bricksCount = 16
-const radius = brickSize * 2.7
-const angleInterval = (2 * Math.PI) / bricksCount
-const bricksIndexes = [...Array(bricksCount).keys()]
-shuffleArray(bricksIndexes)
+export const useLogoSpring = (logoState, headerActiveLink) => {
+  const getValue = headerActiveLink => {
+    if (headerActiveLink === 'cad') {
+      return 90 * 4
+    }
+    if (headerActiveLink === 'lif') {
+      return 90 * 8
+    }
+    if (headerActiveLink === 'hob') {
+      return 90 * 12
+    }
+    return 0
+  }
 
-export const useBrickProps = (
-  state,
-  categoryType,
-  categoryTypeActive,
-  color,
-  col,
-  row,
-  index
-) => {
-  let brickZIndex = 1
-
-  const top = Math.round(
-    logoWidth / 2 +
-      radius * Math.cos(angleInterval * bricksIndexes[index]) -
-      brickSize / 2
-  )
-  const left = Math.round(
-    logoWidth / 2 +
-      radius * Math.sin(angleInterval * bricksIndexes[index]) -
-      brickSize / 2
-  )
-  const [brickProps, setBrickProps] = useSpring(() => ({
+  const logoTranslateSpring = useSpring({
     to: {
-      top,
-      left
+      x: getValue(headerActiveLink)
     },
+    config: config.default
+  })
+
+  const [logoSpring, setLogoSpring] = useSpring(() => ({
     from: {
-      width: brickSize,
-      height: brickSize,
-      top: 120,
-      left: 120,
-      borderRadius: '50%',
-      backgroundColor: Colors.gray400,
-      opacity: 1
-    },
-    config: config.gentle
+      width: logoWidth,
+      marginTop: 100
+    }
   }))
 
-  if (state === 'connect') {
-    setBrickProps({
-      to: {
-        backgroundColor: Colors[color]
-      },
-      config: config.default
+  if (logoState === 'explore') {
+    setLogoSpring({
+      width: navWidth,
+      marginTop: 0
     })
-  }
-
-  if (state === 'construct') {
-    setBrickProps({
-      to: {
-        top: (row - 1) * brickSize,
-        left: (col - 1) * brickSize,
-        borderRadius: '0%'
-      },
-      config: config.default
-    })
-  }
-
-  if (state === 'explore') {
-    if (categoryType === categoryTypeActive) {
-      brickZIndex = 3
-      setBrickProps({
-        to: {
-          width: 90,
-          height: 90,
-          top: 0,
-          left: index * 90,
-          opacity: 1,
-          backgroundColor: Colors[color]
-        },
-        config: config.default
-      })
-    } else {
-      brickZIndex = 1
-      setBrickProps({
-        to: {
-          width: 90,
-          height: 90,
-          top: 0,
-          left: index * 90,
-          opacity: 1,
-          backgroundColor: ColorTransformer(Colors[color])
-            .desaturate(0.85)
-            .hex()
-        },
-        config: config.default
-      })
-    }
   } else {
-    if (state === 'construct') {
-      setBrickProps({
-        width: brickSize,
-        height: brickSize,
-        opacity: 1,
-        backgroundColor: Colors[color]
-      })
-    }
+    setLogoSpring({
+      width: logoWidth,
+      marginTop: 100
+    })
   }
 
-  return [brickProps, brickZIndex]
+  return { logoSpring, logoTranslateSpring }
 }
