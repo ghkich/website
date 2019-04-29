@@ -1,22 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
-import { BrickContainer, BrickIcon, BrickLabel } from './LogoBrick.style'
-import { useBrickSpring } from './LogoBrick.spring'
+import { Container, Icon, Label } from './LogoBrick.style'
+import { useLogoBrickSpring } from './LogoBrick.spring'
 import {
   useHeaderActiveLink,
   useLogoState,
   useLogoActiveBrick
 } from '../../state/action-hooks'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const AnimatedBrickContainer = animated(BrickContainer)
+const Spring = {
+  Container: animated(Container),
+  Icon: animated(Icon)
+}
 
 const LogoBrick = ({ brick, index }) => {
   const [headerActiveLink] = useHeaderActiveLink()
   const [logoState] = useLogoState()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
-  const brickSpring = useBrickSpring(logoState, brick, headerActiveLink, index)
+  const { containerSpring, iconSpring } = useLogoBrickSpring(
+    logoState,
+    brick,
+    headerActiveLink,
+    index
+  )
 
   const handleBrickClick = brick => {
     if (brick !== logoActiveBrick) {
@@ -27,24 +36,22 @@ const LogoBrick = ({ brick, index }) => {
   }
 
   return (
-    <AnimatedBrickContainer
+    <Spring.Container
       active={brick.category === logoActiveBrick}
       onClick={() => handleBrickClick(brick.code)}
-      style={brickSpring}
+      style={containerSpring}
     >
-      <BrickIcon
-        icon={[brick.iconType, brick.icon]}
-        categoryType={brick.categoryType}
-        headerActiveLink={headerActiveLink}
-      />
-      <BrickLabel
+      <Spring.Icon style={iconSpring}>
+        <FontAwesomeIcon icon={[brick.iconType, brick.icon]} />
+      </Spring.Icon>
+      <Label
         color={brick.color}
         categoryType={brick.categoryType}
         headerActiveLink={headerActiveLink}
       >
         {brick.description}
-      </BrickLabel>
-    </AnimatedBrickContainer>
+      </Label>
+    </Spring.Container>
   )
 }
 

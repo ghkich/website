@@ -10,7 +10,7 @@ const angleInterval = (2 * Math.PI) / bricksCount
 const bricksIndexes = [...Array(bricksCount).keys()]
 shuffleArray(bricksIndexes)
 
-export const useBrickSpring = (
+export const useLogoBrickSpring = (
   logoState,
   { categoryType, color, col, row },
   headerActiveLink,
@@ -26,7 +26,7 @@ export const useBrickSpring = (
       radius * Math.sin(angleInterval * bricksIndexes[index]) -
       brickSize / 2
   )
-  const [brickSpring, setBrickSpring] = useSpring(() => ({
+  const [containerSpring, setContainerSpring] = useSpring(() => ({
     to: {
       top,
       left
@@ -43,9 +43,16 @@ export const useBrickSpring = (
     config: config.gentle
   }))
 
+  const [iconSpring, setIconSpring] = useSpring(() => ({
+    from: {
+      fontSize: 25
+    },
+    config: config.default
+  }))
+
   switch (logoState) {
     case 'connect':
-      setBrickSpring({
+      setContainerSpring({
         to: {
           backgroundColor: Colors[color]
         },
@@ -53,7 +60,7 @@ export const useBrickSpring = (
       })
       break
     case 'construct':
-      setBrickSpring({
+      setContainerSpring({
         to: {
           width: brickSize,
           height: brickSize,
@@ -64,9 +71,15 @@ export const useBrickSpring = (
         },
         config: config.default
       })
+      setIconSpring({
+        to: {
+          fontSize: 25
+        },
+        config: config.default
+      })
       break
     case 'explore':
-      setBrickSpring({
+      setContainerSpring({
         to: {
           width: navWidth / 4,
           height: navWidth / 4,
@@ -82,8 +95,14 @@ export const useBrickSpring = (
         },
         config: config.default
       })
+      setIconSpring({
+        to: {
+          fontSize: 32
+        },
+        config: config.default
+      })
       break
   }
 
-  return brickSpring
+  return { containerSpring, iconSpring }
 }

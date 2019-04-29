@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Colors from '../../config/colors'
 
-const BrickContainer = styled.button`
+const Container = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,24 +22,11 @@ const BrickContainer = styled.button`
   }
 `
 
-const setBrickIconStyle = props => {
-  if (props.categoryType === props.headerActiveLink) {
-    return css`
-      font-size: 32px;
-    `
-  }
-  return css`
-    font-size: 25px;
-  `
-}
-
-const BrickIcon = styled(FontAwesomeIcon)`
+const Icon = styled.div`
   color: ${Colors.white};
-  transition: font-size 0.3s linear;
-  ${props => setBrickIconStyle(props)};
 `
 
-const setBrickLabelStyle = props => {
+const setLabelStyle = props => {
   if (props.categoryType === props.headerActiveLink) {
     return css`
       display: block;
@@ -59,10 +45,10 @@ const setBrickLabelStyle = props => {
   `
 }
 
-const BrickLabel = styled.div`
+const Label = styled.div`
   width: 180px;
   text-align: left;
-  ${props => setBrickLabelStyle(props)};
+  ${props => setLabelStyle(props)};
 `
 
-export { BrickContainer, BrickIcon, BrickLabel }
+export { Container, Icon, Label }

@@ -1,5 +1,5 @@
-import { useSpring } from 'react-spring'
-import { navWidth, brickSize } from '../../config/sizes'
+import { useSpring, config } from 'react-spring'
+import { navWidth, brickSize, brickIconFontSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 
 export const useCenterBrickSpring = logoState => {
@@ -19,6 +19,14 @@ export const useCenterBrickSpring = logoState => {
     from: {
       opacity: 1
     }
+  }))
+
+  const [iconSpring, setIconSpring] = useSpring(() => ({
+    from: {
+      fontSize: brickIconFontSize * 3.5,
+      display: 'block'
+    },
+    config: config.default
   }))
 
   switch (logoState) {
@@ -42,6 +50,13 @@ export const useCenterBrickSpring = logoState => {
       setImageSpring({
         opacity: 0
       })
+      setIconSpring({
+        to: {
+          fontSize: brickIconFontSize,
+          display: 'block'
+        },
+        config: config.default
+      })
       break
     case 'explore':
       setContainerSpring({
@@ -54,8 +69,14 @@ export const useCenterBrickSpring = logoState => {
         backgroundColor: Colors.white,
         boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
       })
+      setIconSpring({
+        to: {
+          display: 'none'
+        },
+        config: config.default
+      })
       break
   }
 
-  return { containerSpring, imageSpring }
+  return { containerSpring, imageSpring, iconSpring }
 }
