@@ -7,16 +7,13 @@ import { useLogoState } from '../../state/action-hooks'
 
 const AnimatedContainer = animated(Container)
 const AnimatedImage = animated(Image)
-const AnimatedIcon = animated(Icon)
 
 const ImgCenterBrick = require('../../images/eu.jpg')
 
 const LogoCenterBrick = () => {
   const [logoState] = useLogoState()
 
-  const { containerSpring, imageSpring, iconSpring } = useCenterBrickSpring(
-    logoState
-  )
+  const { containerSpring, imageSpring } = useCenterBrickSpring(logoState)
 
   return (
     <AnimatedContainer style={containerSpring} logoState={logoState}>
@@ -25,7 +22,7 @@ const LogoCenterBrick = () => {
         alt="Gustavo Henrique Kich"
         style={imageSpring}
       />
-      <AnimatedIcon icon={['fas', 'user']} style={iconSpring} />
+      <Icon icon={['fas', 'user']} logoState={logoState} />
     </AnimatedContainer>
   )
 }

@@ -1,5 +1,5 @@
 import { useSpring } from 'react-spring'
-import { navWidth, brickSize, brickIconFontSize } from '../../config/sizes'
+import { navWidth, brickSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 
 export const useCenterBrickSpring = logoState => {
@@ -21,12 +21,6 @@ export const useCenterBrickSpring = logoState => {
     }
   }))
 
-  const [iconSpring, setIconSpring] = useSpring(() => ({
-    from: {
-      fontSize: brickIconFontSize * 3.5
-    }
-  }))
-
   switch (logoState) {
     case 'connect':
       setContainerSpring({
@@ -34,20 +28,19 @@ export const useCenterBrickSpring = logoState => {
       })
       break
     case 'construct':
-      setImageSpring({
-        opacity: 0
-      })
-
       setContainerSpring({
         width: brickSize,
         height: brickSize,
         top: brickSize * 2,
         left: brickSize * 2,
-        borderRadius: '0%'
+        borderRadius: 0,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
+        backgroundColor: Colors.bio,
+        boxShadow: '0 5px 10px rgba(0,0,0,0)'
       })
-
-      setIconSpring({
-        fontSize: brickIconFontSize
+      setImageSpring({
+        opacity: 0
       })
       break
     case 'explore':
@@ -64,5 +57,5 @@ export const useCenterBrickSpring = logoState => {
       break
   }
 
-  return { containerSpring, imageSpring, iconSpring }
+  return { containerSpring, imageSpring }
 }

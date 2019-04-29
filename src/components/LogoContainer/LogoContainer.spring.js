@@ -4,13 +4,13 @@ import { navWidth, logoWidth } from '../../config/sizes'
 export const useLogoSpring = (logoState, headerActiveLink) => {
   const getValue = headerActiveLink => {
     if (headerActiveLink === 'cad') {
-      return 90 * 4
+      return (navWidth / 4) * 4
     }
     if (headerActiveLink === 'lif') {
-      return 90 * 8
+      return (navWidth / 4) * 8
     }
     if (headerActiveLink === 'hob') {
-      return 90 * 12
+      return (navWidth / 4) * 12
     }
     return 0
   }

@@ -22,17 +22,19 @@ const LogoContainer = ({ bricks }) => {
   )
 
   return (
-    <AnimatedContainer
-      logoState={logoState}
-      style={{
-        ...logoSpring,
-        transform: logoTranslateSpring.x.interpolate(x => `translateX(-${x}px)`)
-      }}
-    >
+    <AnimatedContainer logoState={logoState} style={logoSpring}>
       <LogoCenterBrick />
-      {bricks.map((brick, index) => {
-        return <LogoBrick key={brick.code} brick={brick} index={index} />
-      })}
+      <animated.div
+        style={{
+          transform: logoTranslateSpring.x.interpolate(
+            x => `translateX(-${x}px)`
+          )
+        }}
+      >
+        {bricks.map((brick, index) => {
+          return <LogoBrick key={brick.code} brick={brick} index={index} />
+        })}
+      </animated.div>
     </AnimatedContainer>
   )
 }
