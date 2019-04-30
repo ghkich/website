@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSpring, config } from 'react-spring'
 import ColorTransformer from 'color'
 import { logoWidth, navWidth, brickSize } from '../../config/sizes'
@@ -49,47 +50,59 @@ const useSpringStyles = (
     }
   }))
 
-  switch (logoState) {
-    case 'connect':
-      setContainerStyle({
-        to: {
+  useEffect(() => {
+    switch (logoState) {
+      case 'connect':
+        setContainerStyle({
+          to: {
+            backgroundColor: Colors[color]
+          },
+          config: config.default
+        })
+        break
+      case 'construct':
+        setContainerStyle({
+          width: brickSize,
+          height: brickSize,
+          top: (row - 1) * brickSize,
+          left: (col - 1) * brickSize,
+          borderRadius: '0%',
           backgroundColor: Colors[color]
-        },
-        config: config.default
-      })
-      break
-    case 'construct':
-      setContainerStyle({
-        width: brickSize,
-        height: brickSize,
-        top: (row - 1) * brickSize,
-        left: (col - 1) * brickSize,
-        borderRadius: '0%',
-        backgroundColor: Colors[color]
-      })
-      setIconStyle({
-        fontSize: 25
-      })
-      break
-    case 'explore':
-      setContainerStyle({
-        width: navWidth / 4,
-        height: navWidth / 4,
-        top: 0,
-        left: index * (navWidth / 4),
-        opacity: 1,
-        backgroundColor:
-          categoryType === headerActiveLink
-            ? Colors[color]
-            : ColorTransformer(Colors[color])
-                .desaturate(0.85)
-                .hex()
-      })
-      setIconStyle({
-        fontSize: 32
-      })
-      break
-  }
+        })
+        setIconStyle({
+          fontSize: 25
+        })
+        break
+      case 'explore':
+        setContainerStyle({
+          width: navWidth / 4,
+          height: navWidth / 4,
+          top: 0,
+          left: index * (navWidth / 4),
+          opacity: 1,
+          backgroundColor:
+            categoryType === headerActiveLink
+              ? Colors[color]
+              : ColorTransformer(Colors[color])
+                  .desaturate(0.85)
+                  .hex()
+        })
+        setIconStyle({
+          fontSize: 32
+        })
+        break
+    }
+  }, [
+    headerActiveLink,
+    logoState,
+    categoryType,
+    col,
+    color,
+    row,
+    index,
+    setContainerStyle,
+    setIconStyle
+  ])
 
   return { containerStyle, iconStyle }
 }

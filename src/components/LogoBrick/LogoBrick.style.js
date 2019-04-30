@@ -13,7 +13,7 @@ const Container = styled.button`
   position: absolute;
   z-index: 3;
 
-  @media (hover: hover) {
+  /* @media (hover: hover) {
     transition: transform 0.15s linear;
 
     :hover {
@@ -22,7 +22,7 @@ const Container = styled.button`
       overflow: visible !important;
       z-index: 4 !important;
     }
-  }
+  } */
 `
 
 const Icon = styled.div`
