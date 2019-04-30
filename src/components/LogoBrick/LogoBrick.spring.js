@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useSpring, config } from 'react-spring'
 import ColorTransformer from 'color'
 import { logoWidth, navWidth, brickSize } from '../../config/sizes'
@@ -50,61 +49,71 @@ const useSpringStyles = (
     }
   }))
 
-  useEffect(() => {
-    switch (logoState) {
-      case 'connect':
-        setContainerStyle({
-          to: {
-            backgroundColor: Colors[color]
-          },
-          config: config.default
-        })
-        break
-      case 'construct':
-        setContainerStyle({
-          width: brickSize,
-          height: brickSize,
-          top: (row - 1) * brickSize,
-          left: (col - 1) * brickSize,
-          borderRadius: '0%',
-          backgroundColor: Colors[color]
-        })
-        setIconStyle({
-          fontSize: 25
-        })
-        break
-      case 'explore':
-        setContainerStyle({
-          width: navWidth / 4,
-          height: navWidth / 4,
-          top: 0,
-          left: index * (navWidth / 4),
-          opacity: 1,
-          backgroundColor:
-            categoryType === headerActiveLink
-              ? Colors[color]
-              : ColorTransformer(Colors[color])
-                  .desaturate(0.85)
-                  .hex()
-        })
-        setIconStyle({
-          fontSize: 32
-        })
-        break
+  const [labelStyle, setLabelStyle] = useSpring(() => ({
+    from: {
+      height: 0,
+      transform: 'scale(0)',
+      opacity: 0
     }
-  }, [
-    headerActiveLink,
-    logoState,
-    categoryType,
-    col,
-    color,
-    row,
-    index,
-    setContainerStyle,
-    setIconStyle
-  ])
+  }))
 
-  return { containerStyle, iconStyle }
+  switch (logoState) {
+    case 'connect':
+      setContainerStyle({
+        to: {
+          backgroundColor: Colors[color]
+        },
+        config: config.default
+      })
+      break
+    case 'construct':
+      setContainerStyle({
+        width: brickSize,
+        height: brickSize,
+        top: (row - 1) * brickSize,
+        left: (col - 1) * brickSize,
+        borderRadius: '0%',
+        backgroundColor: Colors[color]
+      })
+      setIconStyle({
+        fontSize: 25,
+        opacity: 1
+      })
+      setLabelStyle({
+        height: 0,
+        transform: 'scale(0)'
+      })
+      break
+    case 'explore':
+      setContainerStyle({
+        width: navWidth / 4,
+        height: navWidth / 4,
+        top: 0,
+        left: index * (navWidth / 4),
+        opacity: 1,
+        backgroundColor:
+          categoryType === headerActiveLink
+            ? Colors[color]
+            : ColorTransformer(Colors[color])
+                .desaturate(0.85)
+                .hex()
+      })
+      setIconStyle({
+        fontSize: 32,
+        opacity: categoryType === headerActiveLink ? 1 : 0.3
+      })
+      setLabelStyle({
+        to: {
+          height: 22,
+          transform: 'scale(1)',
+          opacity: categoryType === headerActiveLink ? 1 : 0.3
+        },
+        delay: 100
+      })
+      break
+  }
+
+  return { containerStyle, iconStyle, labelStyle }
 }
 
 export default useSpringStyles

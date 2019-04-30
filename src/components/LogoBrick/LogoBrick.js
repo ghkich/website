@@ -12,7 +12,8 @@ import {
 
 const Anim = {
   Container: animated(Container),
-  Icon: animated(Icon)
+  Icon: animated(Icon),
+  Label: animated(Label)
 }
 
 const LogoBrick = ({ brick, index }) => {
@@ -20,7 +21,7 @@ const LogoBrick = ({ brick, index }) => {
   const [logoState] = useLogoState()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
-  const { containerStyle, iconStyle } = useSpringStyles(
+  const { containerStyle, iconStyle, labelStyle } = useSpringStyles(
     headerActiveLink,
     logoState,
     brick,
@@ -44,13 +45,14 @@ const LogoBrick = ({ brick, index }) => {
       <Anim.Icon style={iconStyle}>
         <FontAwesomeIcon icon={[brick.iconType, brick.icon]} />
       </Anim.Icon>
-      <Label
+      <Anim.Label
         color={brick.color}
         categoryType={brick.categoryType}
         headerActiveLink={headerActiveLink}
+        style={labelStyle}
       >
         {brick.description}
-      </Label>
+      </Anim.Label>
     </Anim.Container>
   )
 }

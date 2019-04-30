@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Colors from '../../config/colors'
 
 const Container = styled.button`
@@ -29,29 +29,11 @@ const Icon = styled.div`
   color: ${Colors.white};
 `
 
-const setLabelStyle = props => {
-  if (props.categoryType === props.headerActiveLink) {
-    return css`
-      display: block;
-      width: auto;
-      color: ${Colors.white};
-      margin-top: 10px;
-      font-size: 12px;
-      position: static;
-    `
-  }
-  return css`
-    display: none;
-    color: ${props => Colors[props.color]};
-    position: absolute;
-    right: -200px;
-  `
-}
-
 const Label = styled.div`
-  width: 180px;
-  text-align: left;
-  ${props => setLabelStyle(props)};
+  display: flex;
+  align-items: flex-end;
+  font-size: 12px;
+  color: ${Colors.white};
 `
 
 export { Container, Icon, Label }

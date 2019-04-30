@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useSpring, config } from 'react-spring'
 import { navWidth, brickSize, brickIconFontSize } from '../../config/sizes'
 import { useContextState } from '../../state/provider'
@@ -33,68 +32,65 @@ const useSpringStyles = () => {
     config: config.default
   }))
 
-  useEffect(() => {
-    switch (logoState) {
-      case 'connect':
+  switch (logoState) {
+    case 'connect':
+      setContainerStyle({
+        backgroundColor: Colors.bio
+      })
+      break
+    case 'construct':
+      setContainerStyle({
+        width: brickSize,
+        height: brickSize,
+        top: brickSize * 2,
+        left: brickSize * 2,
+        borderRadius: 0,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
+        backgroundColor: Colors.bio,
+        boxShadow: '0 5px 10px rgba(0,0,0,0)'
+      })
+      setImageStyle({
+        opacity: 0
+      })
+      setIconStyle({
+        to: {
+          fontSize: brickIconFontSize,
+          display: 'block'
+        },
+        config: config.default
+      })
+      break
+    case 'explore':
+      if (logoStatePrev === 'construct') {
         setContainerStyle({
-          backgroundColor: Colors.bio
+          height: 25,
+          top: navWidth / 3,
+          left: navWidth / 2 - brickSize / 2
         })
-        break
-      case 'construct':
-        setContainerStyle({
-          width: brickSize,
-          height: brickSize,
-          top: brickSize * 2,
-          left: brickSize * 2,
-          borderRadius: 0,
-          borderBottomRightRadius: 0,
-          borderBottomLeftRadius: 0,
-          backgroundColor: Colors.bio,
-          boxShadow: '0 5px 10px rgba(0,0,0,0)'
-        })
-        setImageStyle({
-          opacity: 0
-        })
-        setIconStyle({
-          to: {
-            fontSize: brickIconFontSize,
-            display: 'block'
-          },
-          config: config.default
-        })
-        break
-      case 'explore':
-        if (logoStatePrev === 'construct') {
-          setContainerStyle({
-            height: 20,
-            top: navWidth / 3,
-            left: navWidth / 2 - brickSize / 2,
-            zIndex: 1
-          })
-        }
-        setContainerStyle({
-          to: {
-            width: navWidth,
-            borderBottomRightRadius: 10,
-            borderBottomLeftRadius: 10,
-            top: navWidth / 4,
-            left: 0,
-            backgroundColor: Colors.white,
-            boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
-          },
-          delay: 150,
-          config: config.default
-        })
-        setIconStyle({
-          to: {
-            display: 'none'
-          },
-          delay: 50,
-          config: config.default
-        })
-        break
-    }
-  }, [logoState, logoStatePrev, setContainerStyle, setIconStyle, setImageStyle])
+      }
+      setContainerStyle({
+        to: {
+          width: navWidth,
+          borderBottomRightRadius: 10,
+          borderBottomLeftRadius: 10,
+          top: navWidth / 4,
+          left: 0,
+          backgroundColor: Colors.white,
+          boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
+        },
+        delay: 150,
+        config: config.default
+      })
+      setIconStyle({
+        to: {
+          display: 'none'
+        },
+        delay: 50,
+        config: config.default
+      })
+      break
+  }
 
   return { containerStyle, imageStyle, iconStyle }
 }
