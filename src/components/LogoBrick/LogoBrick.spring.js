@@ -10,10 +10,10 @@ const angleInterval = (2 * Math.PI) / bricksCount
 const bricksIndexes = [...Array(bricksCount).keys()]
 shuffleArray(bricksIndexes)
 
-export const useLogoBrickSpring = (
+const useSpringStyles = (
+  headerActiveLink,
   logoState,
   { categoryType, color, col, row },
-  headerActiveLink,
   index
 ) => {
   const top = Math.round(
@@ -26,7 +26,7 @@ export const useLogoBrickSpring = (
       radius * Math.sin(angleInterval * bricksIndexes[index]) -
       brickSize / 2
   )
-  const [containerSpring, setContainerSpring] = useSpring(() => ({
+  const [containerStyle, setContainerStyle] = useSpring(() => ({
     to: {
       top,
       left
@@ -43,16 +43,15 @@ export const useLogoBrickSpring = (
     config: config.gentle
   }))
 
-  const [iconSpring, setIconSpring] = useSpring(() => ({
+  const [iconStyle, setIconStyle] = useSpring(() => ({
     from: {
       fontSize: 25
-    },
-    config: config.default
+    }
   }))
 
   switch (logoState) {
     case 'connect':
-      setContainerSpring({
+      setContainerStyle({
         to: {
           backgroundColor: Colors[color]
         },
@@ -60,49 +59,39 @@ export const useLogoBrickSpring = (
       })
       break
     case 'construct':
-      setContainerSpring({
-        to: {
-          width: brickSize,
-          height: brickSize,
-          top: (row - 1) * brickSize,
-          left: (col - 1) * brickSize,
-          borderRadius: '0%',
-          backgroundColor: Colors[color]
-        },
-        config: config.default
+      setContainerStyle({
+        width: brickSize,
+        height: brickSize,
+        top: (row - 1) * brickSize,
+        left: (col - 1) * brickSize,
+        borderRadius: '0%',
+        backgroundColor: Colors[color]
       })
-      setIconSpring({
-        to: {
-          fontSize: 25
-        },
-        config: config.default
+      setIconStyle({
+        fontSize: 25
       })
       break
     case 'explore':
-      setContainerSpring({
-        to: {
-          width: navWidth / 4,
-          height: navWidth / 4,
-          top: 0,
-          left: index * (navWidth / 4),
-          opacity: 1,
-          backgroundColor:
-            categoryType === headerActiveLink
-              ? Colors[color]
-              : ColorTransformer(Colors[color])
-                  .desaturate(0.85)
-                  .hex()
-        },
-        config: config.default
+      setContainerStyle({
+        width: navWidth / 4,
+        height: navWidth / 4,
+        top: 0,
+        left: index * (navWidth / 4),
+        opacity: 1,
+        backgroundColor:
+          categoryType === headerActiveLink
+            ? Colors[color]
+            : ColorTransformer(Colors[color])
+                .desaturate(0.85)
+                .hex()
       })
-      setIconSpring({
-        to: {
-          fontSize: 32
-        },
-        config: config.default
+      setIconStyle({
+        fontSize: 32
       })
       break
   }
 
-  return { containerSpring, iconSpring }
+  return { containerStyle, iconStyle }
 }
+
+export default useSpringStyles

@@ -10,15 +10,18 @@ const Container = styled.button`
   outline: none;
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.15s linear;
   position: absolute;
   z-index: 3;
 
-  :hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 12px 1.2px rgba(0, 0, 0, 0.15);
-    overflow: visible !important;
-    z-index: 4 !important;
+  @media (hover: hover) {
+    transition: transform 0.15s linear;
+
+    :hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 12px 1.2px rgba(0, 0, 0, 0.15);
+      overflow: visible !important;
+      z-index: 4 !important;
+    }
   }
 `
 

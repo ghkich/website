@@ -1,45 +1,65 @@
-import { useSpring, config } from 'react-spring'
+import { useSpring } from 'react-spring'
 import { navWidth, logoWidth } from '../../config/sizes'
 
-export const useLogoSpring = (logoState, headerActiveLink) => {
-  const getValue = headerActiveLink => {
-    if (headerActiveLink === 'cad') {
-      return (navWidth / 4) * 4
-    }
-    if (headerActiveLink === 'lif') {
-      return (navWidth / 4) * 8
-    }
-    if (headerActiveLink === 'hob') {
-      return (navWidth / 4) * 12
-    }
-    return 0
-  }
-
-  const logoTranslateSpring = useSpring({
-    to: {
-      x: getValue(headerActiveLink)
-    },
-    config: config.default
-  })
-
-  const [logoSpring, setLogoSpring] = useSpring(() => ({
+const useSpringStyles = (logoState, headerActiveLink) => {
+  const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: logoWidth,
       marginTop: 100
     }
   }))
 
-  if (logoState === 'explore') {
-    setLogoSpring({
-      width: navWidth,
-      marginTop: 0
-    })
-  } else {
-    setLogoSpring({
-      width: logoWidth,
-      marginTop: 100
-    })
+  const [logoStyle, setLogoStyle] = useSpring(() => ({
+    from: {
+      left: 0,
+      position: 'absolute'
+    }
+  }))
+
+  switch (logoState) {
+    case 'explore':
+      setContainerStyle({
+        width: navWidth,
+        marginTop: 0
+      })
+      break
+    default:
+      setContainerStyle({
+        width: logoWidth,
+        marginTop: 100
+      })
+      setLogoStyle({
+        left: 0
+      })
+      break
   }
 
-  return { logoSpring, logoTranslateSpring }
+  switch (headerActiveLink) {
+    case 'pro':
+      setLogoStyle({
+        left: 0
+      })
+      break
+    case 'cad':
+      setLogoStyle({
+        left: -(navWidth / 4) * 4
+      })
+      break
+    case 'lif':
+      setLogoStyle({
+        left: -(navWidth / 4) * 8
+      })
+      break
+    case 'hob':
+      setLogoStyle({
+        to: {
+          left: -(navWidth / 4) * 12
+        }
+      })
+      break
+  }
+
+  return { containerStyle, logoStyle }
 }
+
+export default useSpringStyles

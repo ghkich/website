@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Icon, Label } from './LogoBrick.style'
-import { useLogoBrickSpring } from './LogoBrick.spring'
+import useSpringStyles from './LogoBrick.spring'
 import {
   useHeaderActiveLink,
   useLogoState,
   useLogoActiveBrick
 } from '../../state/action-hooks'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Spring = {
+const Anim = {
   Container: animated(Container),
   Icon: animated(Icon)
 }
@@ -20,10 +20,10 @@ const LogoBrick = ({ brick, index }) => {
   const [logoState] = useLogoState()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
-  const { containerSpring, iconSpring } = useLogoBrickSpring(
+  const { containerStyle, iconStyle } = useSpringStyles(
+    headerActiveLink,
     logoState,
     brick,
-    headerActiveLink,
     index
   )
 
@@ -36,14 +36,14 @@ const LogoBrick = ({ brick, index }) => {
   }
 
   return (
-    <Spring.Container
+    <Anim.Container
       active={brick.category === logoActiveBrick}
       onClick={() => handleBrickClick(brick.code)}
-      style={containerSpring}
+      style={containerStyle}
     >
-      <Spring.Icon style={iconSpring}>
+      <Anim.Icon style={iconStyle}>
         <FontAwesomeIcon icon={[brick.iconType, brick.icon]} />
-      </Spring.Icon>
+      </Anim.Icon>
       <Label
         color={brick.color}
         categoryType={brick.categoryType}
@@ -51,7 +51,7 @@ const LogoBrick = ({ brick, index }) => {
       >
         {brick.description}
       </Label>
-    </Spring.Container>
+    </Anim.Container>
   )
 }
 

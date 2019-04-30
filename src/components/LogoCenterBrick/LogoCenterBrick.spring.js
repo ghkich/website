@@ -2,8 +2,8 @@ import { useSpring, config } from 'react-spring'
 import { navWidth, brickSize, brickIconFontSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 
-export const useCenterBrickSpring = logoState => {
-  const [containerSpring, setContainerSpring] = useSpring(() => ({
+const useSpringStyles = logoState => {
+  const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: brickSize * 3.5,
       height: brickSize * 3.5,
@@ -15,13 +15,13 @@ export const useCenterBrickSpring = logoState => {
     }
   }))
 
-  const [imageSpring, setImageSpring] = useSpring(() => ({
+  const [imageStyle, setImageStyle] = useSpring(() => ({
     from: {
       opacity: 1
     }
   }))
 
-  const [iconSpring, setIconSpring] = useSpring(() => ({
+  const [iconStyle, setIconStyle] = useSpring(() => ({
     from: {
       fontSize: brickIconFontSize * 3.5,
       display: 'block'
@@ -31,12 +31,12 @@ export const useCenterBrickSpring = logoState => {
 
   switch (logoState) {
     case 'connect':
-      setContainerSpring({
+      setContainerStyle({
         backgroundColor: Colors.bio
       })
       break
     case 'construct':
-      setContainerSpring({
+      setContainerStyle({
         width: brickSize,
         height: brickSize,
         top: brickSize * 2,
@@ -47,10 +47,10 @@ export const useCenterBrickSpring = logoState => {
         backgroundColor: Colors.bio,
         boxShadow: '0 5px 10px rgba(0,0,0,0)'
       })
-      setImageSpring({
+      setImageStyle({
         opacity: 0
       })
-      setIconSpring({
+      setIconStyle({
         to: {
           fontSize: brickIconFontSize,
           display: 'block'
@@ -59,7 +59,7 @@ export const useCenterBrickSpring = logoState => {
       })
       break
     case 'explore':
-      setContainerSpring({
+      setContainerStyle({
         width: navWidth,
         height: 20,
         borderBottomRightRadius: 10,
@@ -69,7 +69,7 @@ export const useCenterBrickSpring = logoState => {
         backgroundColor: Colors.white,
         boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
       })
-      setIconSpring({
+      setIconStyle({
         to: {
           display: 'none'
         },
@@ -78,5 +78,7 @@ export const useCenterBrickSpring = logoState => {
       break
   }
 
-  return { containerSpring, imageSpring, iconSpring }
+  return { containerStyle, imageStyle, iconStyle }
 }
+
+export default useSpringStyles

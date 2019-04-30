@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
 import { Container } from './LogoContainer.style'
-import { useLogoSpring } from './LogoContainer.spring'
+import useSpringStyles from './LogoContainer.spring'
 import LogoCenterBrick from '../LogoCenterBrick/LogoCenterBrick'
 import LogoBrick from '../LogoBrick/LogoBrick'
 import { importAndAddIcons } from '../../utils/fontawesome'
@@ -10,32 +10,29 @@ import { useLogoState, useHeaderActiveLink } from '../../state/action-hooks'
 
 importAndAddIcons()
 
-const AnimatedContainer = animated(Container)
+const Anim = {
+  Container: animated(Container),
+  Logo: animated.div
+}
 
 const LogoContainer = ({ bricks }) => {
   const [logoState] = useLogoState()
   const [headerActiveLink] = useHeaderActiveLink()
 
-  const { logoSpring, logoTranslateSpring } = useLogoSpring(
+  const { containerStyle, logoStyle } = useSpringStyles(
     logoState,
     headerActiveLink
   )
 
   return (
-    <AnimatedContainer logoState={logoState} style={logoSpring}>
+    <Anim.Container style={containerStyle}>
       <LogoCenterBrick />
-      <animated.div
-        style={{
-          transform: logoTranslateSpring.x.interpolate(
-            x => `translateX(-${x}px)`
-          )
-        }}
-      >
+      <Anim.Logo style={logoStyle}>
         {bricks.map((brick, index) => {
           return <LogoBrick key={brick.code} brick={brick} index={index} />
         })}
-      </animated.div>
-    </AnimatedContainer>
+      </Anim.Logo>
+    </Anim.Container>
   )
 }
 
