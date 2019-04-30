@@ -66,7 +66,8 @@ const useSpringStyles = () => {
       case 'explore':
         if (logoStatePrev === 'construct') {
           setContainerStyle({
-            top: 120,
+            height: 20,
+            top: navWidth / 3,
             left: navWidth / 2 - brickSize / 2,
             zIndex: 1
           })
@@ -74,10 +75,9 @@ const useSpringStyles = () => {
         setContainerStyle({
           to: {
             width: navWidth,
-            height: 20,
             borderBottomRightRadius: 10,
             borderBottomLeftRadius: 10,
-            top: 90,
+            top: navWidth / 4,
             left: 0,
             backgroundColor: Colors.white,
             boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
