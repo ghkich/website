@@ -1,16 +1,16 @@
 import { useSpring } from 'react-spring'
-import { navWidth, brickSize } from '../../config/sizes'
+import { navWidth, navLogoWidthDiff, brickSize } from '../../config/sizes'
 import { useContextState } from '../../state/provider'
 import Colors from '../../config/colors'
 
 const useSpringStyles = () => {
-  const [{ logoState, logoStatePrev }] = useContextState()
+  const [{ logoState }] = useContextState()
 
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: brickSize,
       height: brickSize,
-      transform: 'scale(3.5, 3.5) translate(0px,0px)',
+      transform: 'scale(3.5) translate(0px,0px)',
       transformOrigin: '50% 50%',
       backgroundColor: Colors.gray400,
       borderRadius: '50%',
@@ -43,7 +43,7 @@ const useSpringStyles = () => {
         borderRadius: 0,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
-        transform: 'scale(1, 1) translate(0px, 0px)',
+        transform: 'scale(1) translate(0px, 0px)',
         backgroundColor: Colors.bio,
         boxShadow: '0 5px 10px rgba(0,0,0,0)'
       })
@@ -55,18 +55,14 @@ const useSpringStyles = () => {
       })
       break
     case 'explore':
-      if (logoStatePrev === 'construct') {
-        setContainerStyle({
-          transform: 'scale(1, 1) translate(30px, 50px)'
-        })
-      }
       setContainerStyle({
         to: {
           width: navWidth,
           height: 25,
           borderBottomRightRadius: 10,
           borderBottomLeftRadius: 10,
-          transform: 'scale(1, 1) translate(-120px, -30px)',
+          transform: `scale(1) translate(-${navWidth / 2 -
+            navLogoWidthDiff / 2}, -60px)`,
           backgroundColor: Colors.white,
           boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
         },

@@ -1,11 +1,11 @@
 import { useSpring } from 'react-spring'
-import { navWidth, logoWidth } from '../../config/sizes'
+import { navWidth } from '../../config/sizes'
 
 const useSpringStyles = (logoState, headerActiveLink) => {
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
-      width: logoWidth,
-      height: logoWidth,
+      width: navWidth,
+      height: navWidth,
       transform: `translateY(${100}px)`
     }
   }))
@@ -26,7 +26,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
       break
     default:
       setContainerStyle({
-        width: logoWidth,
+        width: navWidth,
         transform: `translateY(${100}px)`
       })
       setLogoStyle({

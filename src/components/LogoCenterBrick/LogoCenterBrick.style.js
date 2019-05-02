@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {
+  navLogoWidthDiff,
   brickSize,
   brickIconFontSize,
   brickLabelFontSize
@@ -15,8 +16,8 @@ const Container = styled.button`
   outline: none;
   cursor: pointer;
   position: absolute;
-  top: ${brickSize * 2}px;
-  left: ${brickSize * 2}px;
+  top: ${brickSize * 2 + navLogoWidthDiff / 2}px;
+  left: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   z-index: 4;
 `
 

@@ -1,6 +1,6 @@
 import { useSpring, config } from 'react-spring'
 import ColorTransformer from 'color'
-import { logoWidth, brickSize } from '../../config/sizes'
+import { navWidth, navLogoWidthDiff, brickSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 import { shuffleArray } from '../../utils/arrays'
 
@@ -17,17 +17,18 @@ const useSpringStyles = (
   index
 ) => {
   const circularXPos = Math.round(
-    logoWidth / 2 +
+    navWidth / 2 +
       radius * Math.cos(angleInterval * bricksIndexes[index]) -
       brickSize / 2
   )
   const circularYPos = Math.round(
-    logoWidth / 2 +
+    navWidth / 2 +
       radius * Math.sin(angleInterval * bricksIndexes[index]) -
       brickSize / 2
   )
-  const gShapeXPos = (col - 1) * brickSize
-  const gShapeYPos = (row - 1) * brickSize
+
+  const gShapeXPos = (col - 1) * brickSize + navLogoWidthDiff / 2
+  const gShapeYPos = (row - 1) * brickSize + navLogoWidthDiff / 2
 
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     to: {
