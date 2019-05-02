@@ -1,11 +1,8 @@
 import { useSpring } from 'react-spring'
 import { navWidth, navLogoWidthDiff, brickSize } from '../../config/sizes'
-import { useContextState } from '../../state/provider'
 import Colors from '../../config/colors'
 
-const useSpringStyles = () => {
-  const [{ logoState }] = useContextState()
-
+const useSpringStyles = logoState => {
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: brickSize,

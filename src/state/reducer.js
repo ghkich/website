@@ -6,7 +6,6 @@ export const types = {
 
 export const initialState = {
   headerActiveLink: '',
-  logoStatePrev: '',
   logoState: 'identify',
   logoActiveBrick: ''
 }
@@ -21,7 +20,6 @@ export const reducer = (state, action) => {
     case types.LOGO_STATE_CHANGED:
       return {
         ...state,
-        logoStatePrev: state.logoState,
         logoState: action.logoState
       }
     case types.LOGO_ACTIVE_BRICK_CHANGED:
