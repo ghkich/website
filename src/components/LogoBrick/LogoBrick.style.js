@@ -1,16 +1,21 @@
 import styled from 'styled-components'
+import { brickSize, brickIconFontSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 
 const Container = styled.button`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: ${brickSize}px;
+  height: ${brickSize}px;
+  padding: 5px 0 8px;
   border: none;
   outline: none;
   cursor: pointer;
   overflow: hidden;
   position: absolute;
+  transform-origin: 0% 0%;
   z-index: 3;
 
   /* @media (hover: hover) {
@@ -26,13 +31,18 @@ const Container = styled.button`
 `
 
 const Icon = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
   color: ${Colors.white};
+  font-size: ${brickIconFontSize}px;
 `
 
 const Label = styled.div`
-  display: flex;
-  align-items: flex-end;
-  font-size: 12px;
+  /* backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased; */
+  font-size: 8px;
   color: ${Colors.white};
 `
 

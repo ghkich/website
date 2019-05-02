@@ -1,5 +1,9 @@
 import styled from 'styled-components'
-import { brickLabelFontSize } from '../../config/sizes'
+import {
+  brickSize,
+  brickIconFontSize,
+  brickLabelFontSize
+} from '../../config/sizes'
 import Colors from '../../config/colors'
 
 const Container = styled.button`
@@ -11,18 +15,22 @@ const Container = styled.button`
   outline: none;
   cursor: pointer;
   position: absolute;
+  top: ${brickSize * 2}px;
+  left: ${brickSize * 2}px;
   z-index: 4;
 `
 
 const Image = styled.img`
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
   border-radius: 50%;
   position: absolute;
 `
 
 const Icon = styled.div`
   color: ${Colors.white};
+  font-size: ${brickIconFontSize}px;
 `
 
 const Label = styled.div`

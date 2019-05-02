@@ -5,13 +5,13 @@ const useSpringStyles = (logoState, headerActiveLink) => {
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: logoWidth,
-      marginTop: 100
+      transform: `translateY(${100}px)`
     }
   }))
 
   const [logoStyle, setLogoStyle] = useSpring(() => ({
     from: {
-      left: 0,
+      transform: `translateX(${0}px)`,
       position: 'absolute'
     }
   }))
@@ -20,16 +20,16 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     case 'explore':
       setContainerStyle({
         width: navWidth,
-        marginTop: 0
+        transform: `translateY(${0}px)`
       })
       break
     default:
       setContainerStyle({
         width: logoWidth,
-        marginTop: 100
+        transform: `translateY(${100}px)`
       })
       setLogoStyle({
-        left: 0
+        transform: `translateX(${0}px)`
       })
       break
   }
@@ -37,23 +37,23 @@ const useSpringStyles = (logoState, headerActiveLink) => {
   switch (headerActiveLink) {
     case 'pro':
       setLogoStyle({
-        left: 0
+        transform: `translateX(${0}px)`
       })
       break
     case 'cad':
       setLogoStyle({
-        left: -(navWidth / 4) * 4
+        transform: `translateX(${-(navWidth / 4) * 4}px)`
       })
       break
     case 'lif':
       setLogoStyle({
-        left: -(navWidth / 4) * 8
+        transform: `translateX(${-(navWidth / 4) * 8}px)`
       })
       break
     case 'hob':
       setLogoStyle({
         to: {
-          left: -(navWidth / 4) * 12
+          transform: `translateX(${-(navWidth / 4) * 12}px)`
         }
       })
       break

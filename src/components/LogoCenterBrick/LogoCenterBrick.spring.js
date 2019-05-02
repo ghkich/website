@@ -1,5 +1,5 @@
-import { useSpring, config } from 'react-spring'
-import { navWidth, brickSize, brickIconFontSize } from '../../config/sizes'
+import { useSpring } from 'react-spring'
+import { navWidth, brickSize } from '../../config/sizes'
 import { useContextState } from '../../state/provider'
 import Colors from '../../config/colors'
 
@@ -8,10 +8,10 @@ const useSpringStyles = () => {
 
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
-      width: brickSize * 3.5,
-      height: brickSize * 3.5,
-      top: brickSize * 0.75,
-      left: brickSize * 0.75,
+      width: brickSize,
+      height: brickSize,
+      transform: 'scale(3.5, 3.5) translate(0px,0px)',
+      transformOrigin: '50% 50%',
       backgroundColor: Colors.gray400,
       borderRadius: '50%',
       opacity: 1
@@ -26,10 +26,8 @@ const useSpringStyles = () => {
 
   const [iconStyle, setIconStyle] = useSpring(() => ({
     from: {
-      fontSize: brickIconFontSize * 3.5,
       display: 'block'
-    },
-    config: config.default
+    }
   }))
 
   switch (logoState) {
@@ -42,11 +40,10 @@ const useSpringStyles = () => {
       setContainerStyle({
         width: brickSize,
         height: brickSize,
-        top: brickSize * 2,
-        left: brickSize * 2,
         borderRadius: 0,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
+        transform: 'scale(1, 1) translate(0px, 0px)',
         backgroundColor: Colors.bio,
         boxShadow: '0 5px 10px rgba(0,0,0,0)'
       })
@@ -54,40 +51,32 @@ const useSpringStyles = () => {
         opacity: 0
       })
       setIconStyle({
-        to: {
-          fontSize: brickIconFontSize,
-          display: 'block'
-        },
-        config: config.default
+        display: 'block'
       })
       break
     case 'explore':
       if (logoStatePrev === 'construct') {
         setContainerStyle({
-          height: 25,
-          top: navWidth / 3,
-          left: navWidth / 2 - brickSize / 2
+          transform: 'scale(1, 1) translate(30px, 50px)'
         })
       }
       setContainerStyle({
         to: {
           width: navWidth,
+          height: 25,
           borderBottomRightRadius: 10,
           borderBottomLeftRadius: 10,
-          top: navWidth / 4,
-          left: 0,
+          transform: 'scale(1, 1) translate(-120px, -30px)',
           backgroundColor: Colors.white,
           boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
         },
-        delay: 150,
-        config: config.default
+        delay: 175
       })
       setIconStyle({
         to: {
           display: 'none'
         },
-        delay: 50,
-        config: config.default
+        delay: 50
       })
       break
   }
