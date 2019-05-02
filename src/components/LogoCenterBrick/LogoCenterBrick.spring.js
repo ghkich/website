@@ -10,7 +10,10 @@ const useSpringStyles = logoState => {
       transform: 'scale(3.5) translate(0px,0px)',
       transformOrigin: '50% 50%',
       backgroundColor: Colors.gray400,
-      borderRadius: '50%',
+      borderTopRightRadius: brickSize / 2,
+      borderTopLeftRadius: brickSize / 2,
+      borderBottomRightRadius: brickSize / 2,
+      borderBottomLeftRadius: brickSize / 2,
       opacity: 1
     }
   }))
@@ -37,7 +40,8 @@ const useSpringStyles = logoState => {
       setContainerStyle({
         width: brickSize,
         height: brickSize,
-        borderRadius: 0,
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
         borderBottomRightRadius: 0,
         borderBottomLeftRadius: 0,
         transform: 'scale(1) translate(0px, 0px)',

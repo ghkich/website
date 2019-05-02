@@ -9,33 +9,33 @@ const App = () => {
   const categoryTypes = useFetch('/categoryTypes')
   const categories = useFetch('/categories')
 
+  const dataReady = categories.data.length > 0
+
   const [logoState, setLogoState] = useLogoState()
 
-  if (logoState === 'identify') {
-    setTimeout(() => {
-      setLogoState('discover')
-    }, 300)
-    setTimeout(() => {
-      setLogoState('connect')
-    }, 800)
-    setTimeout(() => {
-      setLogoState('construct')
-    }, 1200)
+  if (dataReady) {
+    if (logoState === 'identify') {
+      setTimeout(() => {
+        setLogoState('discover')
+      }, 300)
+      setTimeout(() => {
+        setLogoState('connect')
+      }, 800)
+      setTimeout(() => {
+        setLogoState('construct')
+      }, 1200)
+    }
   }
 
   if (categoryTypes.error || categories.error) {
-    return <div>ERRO</div>
-  }
-
-  if (!categoryTypes.data) {
-    return <div>Loading...</div>
+    return <div>Ocorreu um erro, recarregue a página.</div>
   }
 
   return (
     <React.Fragment>
       <GlobalStyle />
-      {categoryTypes.data && <Header links={categoryTypes.data} />}
-      {categories.data && <LogoContainer bricks={categories.data} />}
+      <Header links={categoryTypes.data} />
+      <LogoContainer bricks={categories.data} />
     </React.Fragment>
   )
 }
