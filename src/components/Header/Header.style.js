@@ -4,16 +4,18 @@ import ColorTransformer from 'color'
 import Colors from '../../config/colors'
 import { navWidth } from '../../config/sizes'
 
-const HeaderContainer = styled.header`
+const Container = styled.header`
   display: flex;
   justify-content: center;
   background-color: ${Colors.white};
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: absolute;
+  right: 0;
+  left: 0;
   z-index: 10;
 `
 
-const HeaderNav = styled.nav`
+const Nav = styled.nav`
   display: flex;
   width: ${navWidth}px;
 `
@@ -43,7 +45,7 @@ const setActiveLinkStyle = (active, code) => {
   }
 }
 
-const HeaderNavLink = styled.button`
+const NavLink = styled.button`
   flex: 1;
   height: 55px;
   border: none;
@@ -59,10 +61,10 @@ const HeaderNavLink = styled.button`
   ${props => setActiveLinkStyle(props.active, props.code)};
 `
 
-const HeaderNavLinkIcon = styled(FontAwesomeIcon)`
+const NavLinkIcon = styled(FontAwesomeIcon)`
   margin-right: 5px;
   font-size: 12px;
   color: ${Colors.gray600};
 `
 
-export { HeaderContainer, HeaderNav, HeaderNavLink, HeaderNavLinkIcon }
+export { Container, Nav, NavLink, NavLinkIcon }

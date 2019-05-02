@@ -20,7 +20,7 @@ const App = () => {
     }, 800)
     setTimeout(() => {
       setLogoState('construct')
-    }, 1100)
+    }, 1200)
   }
 
   if (categoryTypes.error || categories.error) {

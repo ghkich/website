@@ -1,17 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons'
-import {
-  HeaderContainer,
-  HeaderNav,
-  HeaderNavLink,
-  HeaderNavLinkIcon
-} from './Header.style'
+import { animated } from 'react-spring'
+import { Container, Nav, NavLink, NavLinkIcon } from './Header.style'
+import useSpringStyles from './Header.spring'
 import { useHeaderActiveLink, useLogoState } from '../../state/action-hooks'
 
 const Header = ({ links }) => {
   const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()
-  const [, setLogoState] = useLogoState()
+  const [logoState, setLogoState] = useLogoState()
+
+  const Anim = {
+    Container: animated(Container)
+  }
+
+  const { containerStyle } = useSpringStyles(logoState)
 
   const handleLinkClick = link => {
     if (link !== headerActiveLink) {
@@ -24,24 +27,24 @@ const Header = ({ links }) => {
   }
 
   return (
-    <HeaderContainer>
-      <HeaderNav>
+    <Anim.Container style={containerStyle}>
+      <Nav>
         {links.map(link => {
           const active = link.code === headerActiveLink
           return (
-            <HeaderNavLink
+            <NavLink
               key={link.code}
               code={link.code}
               active={active}
               onClick={() => handleLinkClick(link.code)}
             >
-              {active && <HeaderNavLinkIcon icon={faChevronLeft} />}
+              {active && <NavLinkIcon icon={faChevronLeft} />}
               {active ? link.description.slice(0, 3) : link.description}
-            </HeaderNavLink>
+            </NavLink>
           )
         })}
-      </HeaderNav>
-    </HeaderContainer>
+      </Nav>
+    </Anim.Container>
   )
 }
 

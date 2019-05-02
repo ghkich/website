@@ -6,7 +6,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     from: {
       width: navWidth,
       height: navWidth,
-      transform: `translateY(${100}px)`
+      transform: `translateY(${155}px)`
     }
   }))
 
@@ -21,13 +21,13 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     case 'explore':
       setContainerStyle({
         width: navWidth,
-        transform: `translateY(${0}px)`
+        transform: `translateY(${55}px)`
       })
       break
     default:
       setContainerStyle({
         width: navWidth,
-        transform: `translateY(${100}px)`
+        transform: `translateY(${155}px)`
       })
       setLogoStyle({
         transform: `translateX(${0}px)`
