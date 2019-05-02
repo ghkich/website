@@ -46,14 +46,13 @@ const useSpringStyles = (
   const [iconStyle, setIconStyle] = useSpring(() => ({
     from: {
       opacity: 1,
-      transform: 'scale(1)'
+      transform: 'scale(1) translateY(0px)'
     }
   }))
 
   const [labelStyle, setLabelStyle] = useSpring(() => ({
     from: {
-      height: 0,
-      transform: 'scale(0)',
+      transform: 'scale(0.95) translateY(0px)',
       opacity: 0
     }
   }))
@@ -75,12 +74,11 @@ const useSpringStyles = (
       })
       setIconStyle({
         opacity: 1,
-        transform: 'scale(1)'
+        transform: 'scale(1) translateY(0px)'
       })
       setLabelStyle({
-        height: 0,
-        transform: 'scale(0)',
-        opacity: 1
+        transform: 'scale(0) translateY(0px)',
+        opacity: 0
       })
       break
     case 'explore':
@@ -96,15 +94,11 @@ const useSpringStyles = (
       })
       setIconStyle({
         opacity: categoryType === headerActiveLink ? 1 : 0.3,
-        transform: 'scale(0.9)'
+        transform: 'scale(0.9) translateY(-8px)'
       })
       setLabelStyle({
-        to: {
-          height: 'auto',
-          transform: 'scale(0.95)',
-          opacity: categoryType === headerActiveLink ? 1 : 0.3
-        },
-        delay: 100
+        transform: 'scale(0.95) translateY(-29px)',
+        opacity: categoryType === headerActiveLink ? 1 : 0.3
       })
       break
   }

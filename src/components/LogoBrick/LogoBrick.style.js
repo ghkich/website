@@ -5,11 +5,11 @@ import Colors from '../../config/colors'
 const Container = styled.button`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: ${brickSize}px;
   height: ${brickSize}px;
-  padding: 5px 0 8px;
+  padding: 0;
   border: none;
   outline: none;
   cursor: pointer;
@@ -31,9 +31,6 @@ const Container = styled.button`
 `
 
 const Icon = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
   color: ${Colors.white};
   font-size: ${brickIconFontSize}px;
 `
@@ -44,6 +41,8 @@ const Label = styled.div`
   -webkit-font-smoothing: subpixel-antialiased; */
   font-size: 8px;
   color: ${Colors.white};
+  position: absolute;
+  bottom: -20px;
 `
 
 export { Container, Icon, Label }
