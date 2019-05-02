@@ -5,6 +5,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
   const [containerStyle, setContainerStyle] = useSpring(() => ({
     from: {
       width: logoWidth,
+      height: logoWidth,
       transform: `translateY(${100}px)`
     }
   }))
