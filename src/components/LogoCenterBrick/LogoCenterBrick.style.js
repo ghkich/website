@@ -12,10 +12,10 @@ const Container = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: none;
   outline: none;
   cursor: pointer;
   position: absolute;
+  border: 0;
   top: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   left: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   z-index: 4;
@@ -23,10 +23,8 @@ const Container = styled.button`
 
 const Image = styled.img`
   width: 100%;
-  height: 100%;
-  padding: 2px;
-  border-radius: 50%;
   position: absolute;
+  margin-top: -1px;
 `
 
 const Icon = styled.div`

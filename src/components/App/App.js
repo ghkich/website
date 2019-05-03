@@ -36,6 +36,9 @@ const App = () => {
       <GlobalStyle />
       <Header links={categoryTypes.data} />
       <LogoContainer bricks={categories.data} />
+      <h1>
+        gustavo<span>kich</span>
+      </h1>
     </React.Fragment>
   )
 }

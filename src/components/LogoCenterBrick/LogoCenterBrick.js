@@ -12,7 +12,7 @@ const Anim = {
   Icon: animated(Icon)
 }
 
-const ImgCenterBrick = require('../../images/eu.jpg')
+const ImgCenterBrick = require('../../images/gustavo_kich.svg')
 
 const LogoCenterBrick = () => {
   const [logoState] = useLogoState()

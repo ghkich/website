@@ -26,7 +26,8 @@ const useSpringStyles = logoState => {
 
   const [iconStyle, setIconStyle] = useSpring(() => ({
     from: {
-      display: 'block'
+      display: 'block',
+      opacity: 0
     }
   }))
 
@@ -52,7 +53,8 @@ const useSpringStyles = logoState => {
         opacity: 0
       })
       setIconStyle({
-        display: 'block'
+        display: 'block',
+        opacity: 1
       })
       break
     case 'explore':

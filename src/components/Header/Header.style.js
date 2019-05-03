@@ -8,6 +8,7 @@ const Container = styled.header`
   display: flex;
   justify-content: center;
   background-color: ${Colors.white};
+  border-top: 2px solid ${Colors.gray300};
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
   right: 0;
@@ -37,6 +38,7 @@ const setActiveLinkStyle = (active, code) => {
     return css`
       @media (hover: hover) {
         :hover {
+          border-top-color: ${Colors.gray400};
           color: ${Colors.gray800};
           background-color: ${Colors.gray100};
         }
@@ -49,7 +51,8 @@ const NavLink = styled.button`
   flex: 1;
   height: 55px;
   border: none;
-  border-top: 2px solid ${Colors.none};
+  margin-top: -2px;
+  border-top: 2px solid ${Colors.gray300};
   background-color: ${Colors.none};
   font-size: 14px;
   color: ${Colors.gray700};
