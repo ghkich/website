@@ -20,10 +20,10 @@ const App = () => {
       }, 300)
       setTimeout(() => {
         setLogoState('connect')
-      }, 900)
+      }, 800)
       setTimeout(() => {
         setLogoState('construct')
-      }, 1500)
+      }, 1200)
     }
   }
 
