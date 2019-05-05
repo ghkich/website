@@ -16,6 +16,9 @@ const useSpringStyles = (
   { categoryType, color, col, row },
   index
 ) => {
+  const centeredXPos = brickSize * 2 + navLogoWidthDiff / 2
+  const centeredYPos = brickSize * 2 + navLogoWidthDiff / 2
+
   const circularXPos = Math.round(
     navWidth / 2 +
       radius * Math.cos(angleInterval * bricksIndexes[index]) -
@@ -35,7 +38,7 @@ const useSpringStyles = (
       transform: `scale(1) translate(${circularXPos}px, ${circularYPos}px)`
     },
     from: {
-      transform: `scale(1) translate(${brickSize * 2}px, ${brickSize * 2}px)`,
+      transform: `scale(1) translate(${centeredXPos}px, ${centeredYPos}px)`,
       borderRadius: '50%',
       backgroundColor: Colors.gray400,
       opacity: 1
