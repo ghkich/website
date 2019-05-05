@@ -5,4 +5,8 @@ const Container = styled.div`
   position: relative;
 `
 
-export { Container }
+const Logo = styled.div`
+  position: absolute;
+`
+
+export { Container, Logo }

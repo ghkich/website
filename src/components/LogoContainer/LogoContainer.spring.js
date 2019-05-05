@@ -12,8 +12,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
 
   const [logoStyle, setLogoStyle] = useSpring(() => ({
     from: {
-      transform: `translateX(${0}px)`,
-      position: 'absolute'
+      transform: 'translateX(0px)'
     }
   }))
 
@@ -21,16 +20,18 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     case 'explore':
       setContainerStyle({
         width: navWidth,
-        transform: `translateY(${55}px)`
+        height: 115,
+        transform: 'translateY(-100px)'
       })
       break
     default:
       setContainerStyle({
         width: navWidth,
+        height: navWidth,
         transform: 'translateY(0px)'
       })
       setLogoStyle({
-        transform: `translateX(${0}px)`
+        transform: 'translateX(0px)'
       })
       break
   }
@@ -38,7 +39,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
   switch (headerActiveLink) {
     case 'pro':
       setLogoStyle({
-        transform: `translateX(${0}px)`
+        transform: 'translateX(0px)'
       })
       break
     case 'cad':

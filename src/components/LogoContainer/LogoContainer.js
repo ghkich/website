@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { animated } from 'react-spring'
-import { Container } from './LogoContainer.style'
+import { Container, Logo } from './LogoContainer.style'
 import useSpringStyles from './LogoContainer.spring'
 import LogoCenterBrick from '../LogoCenterBrick/LogoCenterBrick'
 import LogoBrick from '../LogoBrick/LogoBrick'
@@ -12,7 +12,7 @@ importAndAddIcons()
 
 const Anim = {
   Container: animated(Container),
-  Logo: animated.div
+  Logo: animated(Logo)
 }
 
 const LogoContainer = ({ bricks }) => {

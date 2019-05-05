@@ -4,6 +4,7 @@ import { useLogoState } from '../../state/action-hooks'
 import Header from '../Header/Header'
 import LogoContainer from '../LogoContainer/LogoContainer'
 import useFetch from '../../utils/fetch'
+import Colors from '../../config/colors'
 
 const App = () => {
   const categoryTypes = useFetch('/categoryTypes')
@@ -38,11 +39,30 @@ const App = () => {
       <LogoContainer bricks={categories.data} />
       <h1
         style={{
-          margin: '0 auto'
+          width: '300px',
+          margin: '40px auto 10px',
+          textAlign: 'center',
+          fontWeight: 'normal',
+          letterSpacing: '2px',
+          fontSize: '46px',
+          color: Colors.gray700
         }}
       >
-        gustavo<span>kich</span>
+        gustavo<span style={{ color: Colors.gray400 }}>kich</span>
       </h1>
+      <h2
+        style={{
+          width: '300px',
+          margin: '0 auto',
+          textAlign: 'center',
+          fontWeight: 'normal',
+          letterSpacing: '2px',
+          fontSize: '12px',
+          color: Colors.gray400
+        }}
+      >
+        Front-end Developer
+      </h2>
     </React.Fragment>
   )
 }
