@@ -15,7 +15,7 @@ const Container = styled.button`
   outline: none;
   cursor: pointer;
   position: absolute;
-  border: 0;
+  border: 3px solid rgba(255, 255, 255, 0.3);
   top: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   left: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   z-index: 4;
@@ -24,7 +24,6 @@ const Container = styled.button`
 const Image = styled.img`
   width: 100%;
   position: absolute;
-  margin-top: -1px;
 `
 
 const Icon = styled.div`

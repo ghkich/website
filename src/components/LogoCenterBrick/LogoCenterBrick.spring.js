@@ -1,4 +1,5 @@
 import { useSpring } from 'react-spring'
+import ColorTransformer from 'color'
 import { navWidth, navLogoWidthDiff, brickSize } from '../../config/sizes'
 import Colors from '../../config/colors'
 
@@ -7,14 +8,18 @@ const useSpringStyles = logoState => {
     from: {
       width: brickSize,
       height: brickSize,
-      transform: 'scale(3.5) translate(0px,0px)',
+      transform: 'scale(3.8) translate(0px,0px)',
       transformOrigin: '50% 50%',
-      backgroundColor: Colors.gray400,
+      backgroundColor: ColorTransformer(Colors.gray400)
+        .alpha(0.75)
+        .rgb()
+        .string(),
       borderTopRightRadius: brickSize / 2,
       borderTopLeftRadius: brickSize / 2,
       borderBottomRightRadius: brickSize / 2,
       borderBottomLeftRadius: brickSize / 2,
-      opacity: 1
+      opacity: 1,
+      borderWidth: 3
     }
   }))
 
@@ -47,7 +52,8 @@ const useSpringStyles = logoState => {
         borderBottomLeftRadius: 0,
         transform: 'scale(1) translate(0px, 0px)',
         backgroundColor: Colors.bio,
-        boxShadow: '0 5px 10px rgba(0,0,0,0)'
+        boxShadow: '0 5px 10px rgba(0,0,0,0)',
+        borderWidth: 0
       })
       setImageStyle({
         opacity: 0
