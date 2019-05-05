@@ -11,6 +11,7 @@ const Container = styled.header`
   border-top: 2px solid ${Colors.gray300};
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
+  top: 0;
   right: 0;
   left: 0;
   z-index: 10;

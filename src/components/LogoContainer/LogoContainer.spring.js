@@ -6,7 +6,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     from: {
       width: navWidth,
       height: navWidth,
-      transform: `translateY(${155}px)`
+      transform: 'translateY(0px)'
     }
   }))
 
@@ -27,7 +27,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
     default:
       setContainerStyle({
         width: navWidth,
-        transform: `translateY(${155}px)`
+        transform: 'translateY(0px)'
       })
       setLogoStyle({
         transform: `translateX(${0}px)`

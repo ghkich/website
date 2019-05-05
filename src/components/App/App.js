@@ -36,7 +36,11 @@ const App = () => {
       <GlobalStyle />
       <Header links={categoryTypes.data} />
       <LogoContainer bricks={categories.data} />
-      <h1>
+      <h1
+        style={{
+          margin: '0 auto'
+        }}
+      >
         gustavo<span>kich</span>
       </h1>
     </React.Fragment>
