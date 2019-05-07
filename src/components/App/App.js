@@ -7,10 +7,15 @@ import LogoText from '../LogoText/LogoText'
 import useFetch from '../../utils/fetch'
 
 const App = () => {
-  const categoryTypes = useFetch('/categoryTypes')
-  const categories = useFetch('/categories')
+  const locale = 'pt-br'
+  const categories = useFetch('categories', locale)
+  const subcategories = useFetch('subcategories', locale)
+  const projects = useFetch('projects', locale)
 
-  const dataReady = categories.data.length > 0
+  const dataReady =
+    categories.data.length > 0 &&
+    subcategories.data.length > 0 &&
+    projects.data.length > 0
 
   const [logoState, setLogoState] = useLogoState()
 
@@ -28,16 +33,24 @@ const App = () => {
     }
   }
 
-  if (categoryTypes.error || categories.error) {
+  if (subcategories.error || categories.error) {
     return <div>Ocorreu um erro, recarregue a página.</div>
   }
 
   return (
     <React.Fragment>
       <GlobalStyle />
-      <Header links={categoryTypes.data} />
-      <LogoContainer bricks={categories.data} />
+      <Header links={categories.data} />
+      <LogoContainer bricks={subcategories.data} />
       <LogoText />
+      {projects.data.map(project => (
+        <img
+          key={project.id}
+          src={project.cover}
+          alt={project.title}
+          style={{ width: '300px' }}
+        />
+      ))}
     </React.Fragment>
   )
 }

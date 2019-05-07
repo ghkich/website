@@ -38,21 +38,14 @@ const LogoBrick = ({ brick, index }) => {
 
   return (
     <Anim.Container
-      active={brick.category === logoActiveBrick}
+      active={brick.code === logoActiveBrick}
       onClick={() => handleBrickClick(brick.code)}
       style={containerStyle}
     >
       <Anim.Icon style={iconStyle}>
         <FontAwesomeIcon icon={[brick.iconType, brick.icon]} />
       </Anim.Icon>
-      <Anim.Label
-        color={brick.color}
-        categoryType={brick.categoryType}
-        headerActiveLink={headerActiveLink}
-        style={labelStyle}
-      >
-        {brick.description}
-      </Anim.Label>
+      <Anim.Label style={labelStyle}>{brick.description}</Anim.Label>
     </Anim.Container>
   )
 }
@@ -60,7 +53,8 @@ const LogoBrick = ({ brick, index }) => {
 LogoBrick.propTypes = {
   brick: PropTypes.shape({
     code: PropTypes.string.isRequired,
-    categoryType: PropTypes.string.isRequired,
+    categoryRef: PropTypes.shape({ code: PropTypes.string.isRequired })
+      .isRequired,
     description: PropTypes.string.isRequired,
     iconType: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,

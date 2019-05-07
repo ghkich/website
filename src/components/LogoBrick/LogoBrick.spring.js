@@ -13,7 +13,7 @@ shuffleArray(bricksIndexes)
 const useSpringStyles = (
   headerActiveLink,
   logoState,
-  { categoryType, color, col, row },
+  { categoryRef, color, col, row },
   index
 ) => {
   const centeredXPos = brickSize * 2 + navLogoWidthDiff / 2
@@ -89,19 +89,19 @@ const useSpringStyles = (
         transform: `scale(1.5) translate(${index * brickSize}px, ${0}px)`,
         opacity: 1,
         backgroundColor:
-          categoryType === headerActiveLink
+          categoryRef.code === headerActiveLink
             ? Colors[color]
             : ColorTransformer(Colors[color])
                 .desaturate(0.85)
                 .hex()
       })
       setIconStyle({
-        opacity: categoryType === headerActiveLink ? 1 : 0.3,
+        opacity: categoryRef.code === headerActiveLink ? 1 : 0.3,
         transform: 'scale(0.9) translateY(-8px)'
       })
       setLabelStyle({
         transform: 'scale(0.95) translateY(-29px)',
-        opacity: categoryType === headerActiveLink ? 1 : 0.3
+        opacity: categoryRef.code === headerActiveLink ? 1 : 0.3
       })
       break
   }

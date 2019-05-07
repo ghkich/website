@@ -40,7 +40,8 @@ LogoContainer.propTypes = {
   bricks: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.string.isRequired,
-      categoryType: PropTypes.string.isRequired,
+      categoryRef: PropTypes.shape({ code: PropTypes.string.isRequired })
+        .isRequired,
       description: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,
       iconType: PropTypes.string.isRequired,
