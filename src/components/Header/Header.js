@@ -2,7 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { faChevronLeft } from '@fortawesome/pro-solid-svg-icons'
 import { animated } from 'react-spring'
-import { Container, Nav, NavLink, NavLinkIcon } from './Header.style'
+import {
+  Container,
+  Nav,
+  NavLink,
+  NavLinkIcon,
+  NavLinkDivider
+} from './Header.style'
 import useSpringStyles from './Header.spring'
 import { useHeaderActiveLink, useLogoState } from '../../state/action-hooks'
 
@@ -29,18 +35,23 @@ const Header = ({ links }) => {
   return (
     <Anim.Container style={containerStyle}>
       <Nav>
-        {links.map(link => {
+        {links.map((link, index) => {
           const active = link.code === headerActiveLink
           return (
-            <NavLink
-              key={link.code}
-              code={link.code}
-              active={active}
-              onClick={() => handleLinkClick(link.code)}
-            >
-              {active && <NavLinkIcon icon={faChevronLeft} />}
-              {active ? link.description.slice(0, 3) : link.description}
-            </NavLink>
+            <>
+              <NavLink
+                key={link.code}
+                code={link.code}
+                active={active}
+                onClick={() => handleLinkClick(link.code)}
+              >
+                {active && <NavLinkIcon icon={faChevronLeft} />}
+                {active ? link.description.slice(0, 3) : link.description}
+                {index < links.length - 1 && (
+                  <NavLinkDivider key={link.code + 'divider'} />
+                )}
+              </NavLink>
+            </>
           )
         })}
       </Nav>

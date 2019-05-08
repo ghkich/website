@@ -62,6 +62,7 @@ const NavLink = styled.button`
   transition-property: border-color, color, background-color;
   transition-duration: 0.15s;
   transition-timing-function: linear;
+  position: relative;
   ${props => setActiveLinkStyle(props.active, props.code)};
 `
 
@@ -71,4 +72,17 @@ const NavLinkIcon = styled(FontAwesomeIcon)`
   color: ${Colors.gray600};
 `
 
-export { Container, Nav, NavLink, NavLinkIcon }
+const NavLinkDivider = styled.span`
+  display: block;
+  width: 1px;
+  height: 20px;
+  background-color: ${ColorTransformer(Colors.gray300)
+    .alpha(0.75)
+    .rgb()
+    .string()};
+  position: absolute;
+  top: 17px;
+  right: 0;
+`
+
+export { Container, Nav, NavLink, NavLinkIcon, NavLinkDivider }

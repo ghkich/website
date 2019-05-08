@@ -3,6 +3,7 @@ module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-styled-components'],
   rules: {
     'no-duplicate-selectors': null,
-    'declaration-colon-newline-after': null
+    'declaration-colon-newline-after': null,
+    'selector-type-no-unknown': null
   }
 }
