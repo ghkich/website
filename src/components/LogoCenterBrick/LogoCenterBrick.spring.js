@@ -67,15 +67,15 @@ const useSpringStyles = logoState => {
       setContainerStyle({
         to: {
           width: navWidth,
-          height: 25,
-          borderBottomRightRadius: 10,
-          borderBottomLeftRadius: 10,
+          height: 16,
+          borderBottomRightRadius: 8,
+          borderBottomLeftRadius: 8,
           transform: `scale(1) translate(-${navWidth / 2 -
             navLogoWidthDiff / 2}, -60px)`,
           backgroundColor: Colors.white,
-          boxShadow: '0 5px 10px rgba(0,0,0,0.1)'
+          boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
         },
-        delay: 175
+        delay: 150
       })
       setIconStyle({
         to: {
