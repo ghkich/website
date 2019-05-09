@@ -89,19 +89,19 @@ const useSpringStyles = (
         transform: `scale(1.5) translate(${index * brickSize}px, ${0}px)`,
         opacity: 1,
         backgroundColor:
-          categoryRef.code === headerActiveLink
+          categoryRef.id === headerActiveLink
             ? Colors[color]
             : ColorTransformer(Colors[color])
                 .desaturate(0.85)
                 .hex()
       })
       setIconStyle({
-        opacity: categoryRef.code === headerActiveLink ? 1 : 0.3,
+        opacity: categoryRef.id === headerActiveLink ? 1 : 0.3,
         transform: 'scale(0.9) translateY(-8px)'
       })
       setLabelStyle({
         transform: 'scale(0.95) translateY(-29px)',
-        opacity: categoryRef.code === headerActiveLink ? 1 : 0.3
+        opacity: categoryRef.id === headerActiveLink ? 1 : 0.3
       })
       break
   }

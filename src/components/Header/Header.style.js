@@ -22,14 +22,14 @@ const Nav = styled.nav`
   width: ${navWidth}px;
 `
 
-const setActiveLinkStyle = (active, code) => {
+const setActiveLinkStyle = (active, id) => {
   if (active) {
-    const desaturatedColor = ColorTransformer(Colors[code])
+    const desaturatedColor = ColorTransformer(Colors[id])
       .desaturate(0.5)
       .hex()
 
     return css`
-      border-top-color: ${Colors[code]};
+      border-top-color: ${Colors[id]};
       background-color: ${Colors.gray200};
       text-transform: uppercase;
       font-weight: bold;
@@ -63,7 +63,7 @@ const NavLink = styled.button`
   transition-duration: 0.15s;
   transition-timing-function: linear;
   position: relative;
-  ${props => setActiveLinkStyle(props.active, props.code)};
+  ${props => setActiveLinkStyle(props.active, props.id)};
 `
 
 const NavLinkIcon = styled(FontAwesomeIcon)`
