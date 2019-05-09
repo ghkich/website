@@ -38,8 +38,8 @@ const LogoBrick = ({ brick, index }) => {
 
   return (
     <Anim.Container
-      active={brick.code === logoActiveBrick}
-      onClick={() => handleBrickClick(brick.code)}
+      active={brick.id === logoActiveBrick}
+      onClick={() => handleBrickClick(brick.id)}
       style={containerStyle}
     >
       <Anim.Icon style={iconStyle}>
@@ -52,8 +52,8 @@ const LogoBrick = ({ brick, index }) => {
 
 LogoBrick.propTypes = {
   brick: PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    categoryRef: PropTypes.shape({ code: PropTypes.string.isRequired })
+    id: PropTypes.string.isRequired,
+    categoryRef: PropTypes.shape({ id: PropTypes.string.isRequired })
       .isRequired,
     description: PropTypes.string.isRequired,
     iconType: PropTypes.string.isRequired,

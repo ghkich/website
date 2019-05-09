@@ -29,7 +29,7 @@ const LogoContainer = ({ bricks }) => {
       <LogoCenterBrick />
       <Anim.Logo style={logoStyle}>
         {bricks.map((brick, index) => {
-          return <LogoBrick key={brick.code} brick={brick} index={index} />
+          return <LogoBrick key={brick.id} brick={brick} index={index} />
         })}
       </Anim.Logo>
     </Anim.Container>
@@ -39,8 +39,8 @@ const LogoContainer = ({ bricks }) => {
 LogoContainer.propTypes = {
   bricks: PropTypes.arrayOf(
     PropTypes.shape({
-      code: PropTypes.string.isRequired,
-      categoryRef: PropTypes.shape({ code: PropTypes.string.isRequired })
+      id: PropTypes.string.isRequired,
+      categoryRef: PropTypes.shape({ id: PropTypes.string.isRequired })
         .isRequired,
       description: PropTypes.string.isRequired,
       icon: PropTypes.string.isRequired,

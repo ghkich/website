@@ -36,22 +36,18 @@ const Header = ({ links }) => {
     <Anim.Container style={containerStyle}>
       <Nav>
         {links.map((link, index) => {
-          const active = link.code === headerActiveLink
+          const active = link.id === headerActiveLink
           return (
-            <>
-              <NavLink
-                key={link.code}
-                code={link.code}
-                active={active}
-                onClick={() => handleLinkClick(link.code)}
-              >
-                {active && <NavLinkIcon icon={faChevronLeft} />}
-                {active ? link.description.slice(0, 3) : link.description}
-                {index < links.length - 1 && (
-                  <NavLinkDivider key={link.code + 'divider'} />
-                )}
-              </NavLink>
-            </>
+            <NavLink
+              key={link.id}
+              id={link.id}
+              active={active}
+              onClick={() => handleLinkClick(link.id)}
+            >
+              {active && <NavLinkIcon icon={faChevronLeft} />}
+              {active ? link.description.slice(0, 3) : link.description}
+              {index < links.length - 1 && <NavLinkDivider />}
+            </NavLink>
           )
         })}
       </Nav>
@@ -62,7 +58,7 @@ const Header = ({ links }) => {
 Header.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
-      code: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired
     })
   ).isRequired
