@@ -36,9 +36,6 @@ const Icon = styled.div`
 `
 
 const Label = styled.div`
-  /* backface-visibility: hidden;
-  transform: translateZ(0);
-  -webkit-font-smoothing: subpixel-antialiased; */
   font-size: 8px;
   color: ${Colors.white};
   position: absolute;
