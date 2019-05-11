@@ -17,6 +17,10 @@ const Container = styled.button`
   position: absolute;
   transform-origin: 0% 0%;
   transition: box-shadow 0.15s linear;
+  box-shadow: ${props =>
+    props.active
+      ? 'inset 0 0 20px 5px rgba(0, 0, 0, 0.25) !important'
+      : 'none'};
 
   @media (hover: hover) {
     :hover {
