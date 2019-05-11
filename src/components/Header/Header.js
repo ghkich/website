@@ -10,11 +10,16 @@ import {
   NavLinkDivider
 } from './Header.style'
 import useSpringStyles from './Header.spring'
-import { useHeaderActiveLink, useLogoState } from '../../state/action-hooks'
+import {
+  useHeaderActiveLink,
+  useLogoState,
+  useLogoActiveBrick
+} from '../../state/action-hooks'
 
 const Header = ({ links }) => {
   const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()
   const [logoState, setLogoState] = useLogoState()
+  const [, setLogoActiveBrick] = useLogoActiveBrick()
 
   const Anim = {
     Container: animated(Container)
@@ -22,9 +27,10 @@ const Header = ({ links }) => {
 
   const { containerStyle } = useSpringStyles(logoState)
 
-  const handleLinkClick = link => {
-    if (link !== headerActiveLink) {
-      setHeaderActiveLink(link)
+  const handleLinkClick = linkId => {
+    setLogoActiveBrick('')
+    if (linkId !== headerActiveLink) {
+      setHeaderActiveLink(linkId)
       setLogoState('explore')
     } else {
       setHeaderActiveLink('')

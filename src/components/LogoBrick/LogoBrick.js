@@ -17,8 +17,8 @@ const Anim = {
 }
 
 const LogoBrick = ({ brick, index }) => {
-  const [headerActiveLink] = useHeaderActiveLink()
-  const [logoState] = useLogoState()
+  const [headerActiveLink, setHeaderActiveLink] = useHeaderActiveLink()
+  const [logoState, setLogoState] = useLogoState()
   const [logoActiveBrick, setLogoActiveBrick] = useLogoActiveBrick()
 
   const { containerStyle, iconStyle, labelStyle } = useSpringStyles(
@@ -28,10 +28,14 @@ const LogoBrick = ({ brick, index }) => {
     index
   )
 
-  const handleBrickClick = brick => {
-    if (brick !== logoActiveBrick) {
-      setLogoActiveBrick(brick)
+  const handleBrickClick = (brickId, linkId) => {
+    if (brickId !== logoActiveBrick) {
+      setLogoState('explore')
+      setHeaderActiveLink(linkId)
+      setLogoActiveBrick(brickId)
     } else {
+      setLogoState('construct')
+      setHeaderActiveLink('')
       setLogoActiveBrick('')
     }
   }
@@ -39,7 +43,7 @@ const LogoBrick = ({ brick, index }) => {
   return (
     <Anim.Container
       active={brick.id === logoActiveBrick}
-      onClick={() => handleBrickClick(brick.id)}
+      onClick={() => handleBrickClick(brick.id, brick.categoryRef.id)}
       style={containerStyle}
     >
       <Anim.Icon style={iconStyle}>

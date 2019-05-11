@@ -38,6 +38,7 @@ const setActiveLinkStyle = (active, id) => {
   } else {
     return css`
       @media (hover: hover) {
+        :focus,
         :hover {
           border-top-color: ${Colors.gray400};
           color: ${Colors.gray800};
@@ -58,6 +59,7 @@ const NavLink = styled.button`
   font-size: 14px;
   color: ${Colors.gray700};
   outline: none;
+  -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   transition-property: border-color, color, background-color;
   transition-duration: 0.15s;
