@@ -12,7 +12,8 @@ const useSpringStyles = (logoState, headerActiveLink) => {
 
   const [logoStyle, setLogoStyle] = useSpring(() => ({
     from: {
-      transform: 'translateX(0px)'
+      transform: 'translateX(0px)',
+      zIndex: 3
     }
   }))
 
@@ -31,7 +32,8 @@ const useSpringStyles = (logoState, headerActiveLink) => {
         transform: 'translateY(0px)'
       })
       setLogoStyle({
-        transform: 'translateX(0px)'
+        transform: 'translateX(0px)',
+        zIndex: 5
       })
       break
   }

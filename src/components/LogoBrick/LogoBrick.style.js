@@ -16,18 +16,13 @@ const Container = styled.button`
   overflow: hidden;
   position: absolute;
   transform-origin: 0% 0%;
-  z-index: 3;
+  transition: box-shadow 0.15s linear;
 
-  /* @media (hover: hover) {
-    transition: transform 0.15s linear;
-
+  @media (hover: hover) {
     :hover {
-      transform: scale(1.2);
-      box-shadow: 0 0 12px 1.2px rgba(0, 0, 0, 0.15);
-      overflow: visible !important;
-      z-index: 4 !important;
+      box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.15);
     }
-  } */
+  }
 `
 
 const Icon = styled.div`
@@ -36,6 +31,8 @@ const Icon = styled.div`
 `
 
 const Label = styled.div`
+  width: 100%;
+  text-align: center;
   font-size: 8px;
   color: ${Colors.white};
   position: absolute;
