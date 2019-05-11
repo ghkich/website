@@ -38,7 +38,6 @@ const setActiveLinkStyle = (active, id) => {
   } else {
     return css`
       @media (hover: hover) {
-        :focus,
         :hover {
           border-top-color: ${Colors.gray400};
           color: ${Colors.gray800};

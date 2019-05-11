@@ -10,7 +10,6 @@ const setActiveBrickStyle = active => {
   } else {
     return css`
       @media (hover: hover) {
-        :focus,
         :hover {
           box-shadow: inset 0 0 12px 2px rgba(0, 0, 0, 0.15);
         }
