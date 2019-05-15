@@ -8,8 +8,6 @@ const useSpringStyles = logoState => {
   }))
 
   switch (logoState) {
-    case 'discover':
-      break
     case 'connect':
       setContainerStyle({
         to: {

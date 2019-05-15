@@ -2,38 +2,31 @@ import styled from 'styled-components'
 import Colors from '../../config/colors'
 
 const Container = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70px;
+  height: 38px;
+  margin: 50px auto;
+  padding: 4px;
+  border-radius: 18px;
+  background-color: ${Colors.gray300};
+  cursor: pointer;
 
-  h1 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 50px;
-    font-weight: normal;
-    letter-spacing: 2px;
+  > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-transform: uppercase;
     color: ${Colors.gray700};
+    font-size: 13px;
 
-    span {
-      color: ${Colors.gray600};
+    &:first-child {
+      background-color: ${Colors.white};
     }
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 12px;
-    font-weight: normal;
-    letter-spacing: 1px;
-    color: ${Colors.gray600};
-  }
-
-  p {
-    max-width: 500px;
-    margin: 40px auto 0;
-    line-height: 1.5;
-    font-size: 16px;
-    text-align: center;
-    color: ${Colors.gray700};
   }
 `
 

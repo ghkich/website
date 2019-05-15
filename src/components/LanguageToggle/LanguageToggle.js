@@ -14,8 +14,8 @@ const LanguageToggle = () => {
 
   return (
     <Anim.Container style={containerStyle}>
-      <div>En</div>
-      <div>Pt</div>
+      <span>En</span>
+      <span>Pt</span>
     </Anim.Container>
   )
 }
