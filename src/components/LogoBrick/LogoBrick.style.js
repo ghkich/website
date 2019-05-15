@@ -33,6 +33,7 @@ const Container = styled.button`
   cursor: pointer;
   overflow: hidden;
   position: absolute;
+  z-index: 3;
   transform-origin: 0% 0%;
   transition: box-shadow 0.15s linear;
   ${props => setActiveBrickStyle(props.active)};

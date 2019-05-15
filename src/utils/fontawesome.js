@@ -14,9 +14,16 @@ import {
   faPencil,
   faGamepad,
   faFilmAlt,
-  faPlane
+  faPlane,
+  faEnvelope
 } from '@fortawesome/pro-solid-svg-icons'
-import { faYoutube } from '@fortawesome/free-brands-svg-icons'
+import {
+  faYoutube,
+  faGithub,
+  faBehance,
+  faTwitter,
+  faWhatsapp
+} from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 const importAndAddIcons = () => {
@@ -37,7 +44,12 @@ const importAndAddIcons = () => {
     faGamepad,
     faFilmAlt,
     faPlane,
-    faYoutube
+    faEnvelope,
+    faYoutube,
+    faGithub,
+    faTwitter,
+    faBehance,
+    faWhatsapp
   )
 }
 

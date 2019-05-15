@@ -18,14 +18,7 @@ const useSpringStyles = (logoState, headerActiveLink) => {
   }))
 
   switch (logoState) {
-    case 'explore':
-      setContainerStyle({
-        width: navWidth,
-        height: 115,
-        transform: 'translateY(-100px)'
-      })
-      break
-    default:
+    case 'construct':
       setContainerStyle({
         width: navWidth,
         height: navWidth,
@@ -34,6 +27,13 @@ const useSpringStyles = (logoState, headerActiveLink) => {
       setLogoStyle({
         transform: 'translateX(0px)',
         zIndex: 5
+      })
+      break
+    case 'explore':
+      setContainerStyle({
+        width: navWidth,
+        height: 115,
+        transform: 'translateY(-100px)'
       })
       break
   }

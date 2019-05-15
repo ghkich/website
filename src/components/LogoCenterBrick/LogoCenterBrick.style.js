@@ -12,13 +12,13 @@ const Container = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.3);
   outline: none;
   cursor: pointer;
   position: absolute;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  z-index: 4;
   top: ${brickSize * 2 + navLogoWidthDiff / 2}px;
   left: ${brickSize * 2 + navLogoWidthDiff / 2}px;
-  z-index: 4;
 `
 
 const Image = styled.img`

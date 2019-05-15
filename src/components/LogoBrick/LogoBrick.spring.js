@@ -34,16 +34,12 @@ const useSpringStyles = (
   const gShapeYPos = (row - 1) * brickSize + navLogoWidthDiff / 2
 
   const [containerStyle, setContainerStyle] = useSpring(() => ({
-    to: {
-      transform: `scale(1) translate(${circularXPos}px, ${circularYPos}px)`
-    },
     from: {
       transform: `scale(1) translate(${centeredXPos}px, ${centeredYPos}px)`,
       borderRadius: '50%',
       backgroundColor: Colors.gray400,
       opacity: 1
-    },
-    config: config.gentle
+    }
   }))
 
   const [iconStyle, setIconStyle] = useSpring(() => ({
@@ -61,6 +57,14 @@ const useSpringStyles = (
   }))
 
   switch (logoState) {
+    case 'discover':
+      setContainerStyle({
+        to: {
+          transform: `scale(1) translate(${circularXPos}px, ${circularYPos}px)`
+        },
+        config: config.gentle
+      })
+      break
     case 'connect':
       setContainerStyle({
         to: {
