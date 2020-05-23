@@ -8,21 +8,11 @@ const useSpringStyles = logoState => {
   }))
 
   switch (logoState) {
-    case 'connect':
+    case 'discover':
       setContainerStyle({
         to: {
-          opacity: 1
+          opacity: 0
         }
-      })
-      break
-    case 'construct':
-      setContainerStyle({
-        opacity: 1
-      })
-      break
-    case 'explore':
-      setContainerStyle({
-        opacity: 0
       })
       break
   }

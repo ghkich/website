@@ -1,22 +1,23 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { animated } from 'react-spring'
-import { Container } from './StartLinks.style'
-import useSpringStyles from './StartLinks.spring'
+
 import { useLogoState } from '../../state/action-hooks'
+import useSpringStyles from './StartLinks.spring'
+import { Container } from './StartLinks.style'
 
 const Anim = {
-  Container: animated(Container)
+  Container: animated(Container),
 }
 
-const StartLinks = ({ onRightClick }) => {
+const StartLinks = ({onRightClick}) => {
   const [logoState] = useLogoState()
-  const { containerStyle } = useSpringStyles(logoState)
+  const {containerStyle} = useSpringStyles(logoState)
 
   return (
     <Anim.Container style={containerStyle}>
-      <div>Currículo</div>
-      <div style={{ margin: '0 10px', opacity: '0.3' }}>|</div>
+      <div>Resume</div>
+      <div style={{margin: '0 10px', opacity: '0.3'}}>|</div>
       <div role="presentation" onClick={onRightClick}>
         Website
       </div>
@@ -25,7 +26,7 @@ const StartLinks = ({ onRightClick }) => {
 }
 
 StartLinks.propTypes = {
-  onRightClick: PropTypes.func.isRequired
+  onRightClick: PropTypes.func.isRequired,
 }
 
 export default StartLinks
