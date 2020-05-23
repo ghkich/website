@@ -34,6 +34,12 @@ const App = () => {
     }
   }
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      discoverMore()
+    }, 300)
+  }, [])
+
   if (subcategories.error || categories.error) {
     return <div>Ocorreu um erro, recarregue a página.</div>
   }
