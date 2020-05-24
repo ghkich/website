@@ -1,13 +1,14 @@
 import React from 'react'
-import { GlobalStyle } from './App.style'
+
 import { useLogoState } from '../../state/action-hooks'
+import useFetch from '../../utils/fetch'
+import ContactLinks from '../ContactLinks/ContactLinks'
 import Header from '../Header/Header'
+import LanguageToggle from '../LanguageToggle/LanguageToggle'
 import LogoContainer from '../LogoContainer/LogoContainer'
 import LogoText from '../LogoText/LogoText'
-import useFetch from '../../utils/fetch'
-import LanguageToggle from '../LanguageToggle/LanguageToggle'
-import ContactLinks from '../ContactLinks/ContactLinks'
 import StartLinks from '../StartLinks/StartLinks'
+import { GlobalStyle } from './App.style'
 
 const App = () => {
   const locale = 'pt-br'
@@ -37,8 +38,8 @@ const App = () => {
   React.useEffect(() => {
     setTimeout(() => {
       discoverMore()
-    }, 300)
-  }, [])
+    }, 1000)
+  }, [dataReady])
 
   if (subcategories.error || categories.error) {
     return <div>Ocorreu um erro, recarregue a página.</div>
